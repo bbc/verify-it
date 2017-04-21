@@ -1,0 +1,28 @@
+{
+  "name": "verify-it",
+  "version": "0.0.1",
+  "description": "A property-based testing framework for NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --reporter=html --reporter=text mocha --reporter mocha-jenkins-reporter test/*.js test/**/*.js && standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbc/verify-it.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bbc/verify-it/issues"
+  },
+  "homepage": "https://github.com/bbc/verify-it#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "mocha-jenkins-reporter": "^0.3.7",
+    "nsp": "^2.6.3",
+    "nyc": "^10.2.0",
+    "standard": "^10.0.2"
+  }
+}
