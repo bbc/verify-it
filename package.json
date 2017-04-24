@@ -4,7 +4,7 @@
   "description": "A property-based testing framework for NodeJS",
   "main": "index.js",
   "scripts": {
-    "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --reporter=html --reporter=text mocha --reporter mocha-jenkins-reporter test/*.js test/**/*.js && standard"
+    "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --reporter=html --reporter=text mocha --reporter mocha-jenkins-reporter test/*.js test/**/*.js && standard"
   },
   "repository": {
     "type": "git",
@@ -16,13 +16,26 @@
     "url": "https://github.com/bbc/verify-it/issues"
   },
   "homepage": "https://github.com/bbc/verify-it#readme",
+  "dependencies": {
+    "random-js": "^1.0.8"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "mocha-jenkins-reporter": "^0.3.7",
     "nsp": "^2.6.3",
     "nyc": "^10.2.0",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^2.9.0",
     "standard": "^10.0.2"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "verify"
+    ]
   }
 }
