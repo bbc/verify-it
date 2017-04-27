@@ -1,27 +1,22 @@
 const Random = require('random-js')
-const CombinationGenerators = require('./CombinationGenerators')
+const FunctionEnumerator = require('./util/FunctionEnumerator')
+const StringGenerators = require('./generators/StringGenerators')
+const NumericGenerators = require('./generators/NumericGenerators')
+const CombinationGenerators = require('./generators/CombinationGenerators')
 
 const random = new Random(Random.engines.mt19937().autoSeed())
+const stringGenerators = new StringGenerators(random)
+const numericGenerators = new NumericGenerators(random)
 const combinationGenerators = new CombinationGenerators(random, 10)
 
-const string = () => random.string(random.integer(0, 100))
+const generators = [
+  stringGenerators,
+  numericGenerators,
+  combinationGenerators
+]
 
-const fixedLengthString = (length) => {
-  if (length === null || length === undefined) {
-    throw new Error('The length of string to be generated must be provided')
-  }
-
-  return () => random.string(length)
-}
-
-const integer = () => random.integer(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
-
-const real = () => random.real(Number.MIN_VALUE, Number.MAX_VALUE)
-
-module.exports = {
-  string: string,
-  fixedLengthString: fixedLengthString,
-  integer: integer,
-  real: real,
-  pairOf: combinationGenerators.pairOf
-}
+generators.forEach((generator) => {
+  FunctionEnumerator.enumerate(generator).forEach((name) => {
+    module.exports[name] = generator[name]
+  })
+})
