@@ -1,5 +1,5 @@
 const StringGenerators = function (random) {
-  this.string = () => random.string(random.integer(0, 100))
+  this.string = () => random.string(random.integer(1, 100))
 
   this.fixedLengthString = (length) => {
     if (length === null || length === undefined) {
