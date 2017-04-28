@@ -34,7 +34,7 @@ pipeline {
           if (tagExists) {
             echo "Release $version already exists -- skipping tagging of release"
           } else {
-            tagRelease([ release: version ])
+            tagRelease([ release: version, releaseTitle: 'Release' ])
           }
         }
       }
