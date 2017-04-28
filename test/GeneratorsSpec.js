@@ -183,4 +183,101 @@ describe('Generators', () => {
       generator.should.have.callCount(11)
     })
   })
+
+  describe('object', () => {
+    it('should produce an object', () => {
+      Gen.object().should.be.an('Object')
+    })
+
+    it('should produce an object with some keys', () => {
+      const generated = Gen.object()
+      Object.getOwnPropertyNames(generated).should.have.length.greaterThan(0)
+    })
+
+    it('should produce different objects on subsequent calls', () => {
+      const first = Gen.object()
+      const second = Gen.object()
+
+      first.should.not.eql(second)
+    })
+
+    it('should produce objects with different keys on subsequent calls', () => {
+      const first = Gen.object()
+      const second = Gen.object()
+
+      Object.getOwnPropertyNames(first).should.not.eql(Object.getOwnPropertyNames(second))
+    })
+
+    it('should produce objects with different numbers of keys', () => {
+      const generated = new Array(10).fill(0).map(() => Gen.object())
+      const lengthSet = new Set(generated.map((object) => Object.getOwnPropertyNames(object).length))
+      lengthSet.size.should.be.greaterThan(1)
+    })
+
+    it('should produce objects with string values', () => {
+      const generated = Gen.object()
+      Object.getOwnPropertyNames(generated).forEach((name) => {
+        generated[name].should.be.a('String')
+      })
+    })
+  })
+
+  describe('objectWith', () => {
+    it('should throw an error if no property names are supplied', () => {
+      expect(() => Gen.objectWith()).to.throw(Error, 'At least one property name must be provided')
+    })
+
+    it('should return an Object', () => {
+      Gen.objectWith('').should.be.an('Object')
+    })
+
+    it('should return an object with the correct number of property names', () => {
+      const numberOfProperties = TestData.integer(1, 10)
+      const args = new Array(numberOfProperties).fill(1).map(() => TestData.string(30))
+      const generated = Gen.objectWith.apply(Gen, args)
+      Object.getOwnPropertyNames(generated).length.should.eql(numberOfProperties)
+    })
+
+    it('should return an object with the required property names', () => {
+      const property1 = TestData.string()
+      const property2 = TestData.string()
+
+      const generated = Gen.objectWith(property1, property2)
+      Object.getOwnPropertyNames(generated).should.contain(property1, property2)
+    })
+
+    it('should return an object with string property values', () => {
+      const property1 = TestData.string()
+      const property2 = TestData.string()
+
+      const generated = Gen.objectWith(property1, property2)
+      generated[property1].should.be.a('String')
+      generated[property2].should.be.a('String')
+    })
+
+    it('should return an object with randomised property values', () => {
+      const property1 = TestData.string()
+      const property2 = TestData.string()
+
+      const generated = Gen.objectWith(property1, property2)
+      generated[property1].should.not.eql(generated[property2])
+    })
+  })
+
+  describe('error', () => {
+    it('should produce an error', () => {
+      Gen.error().should.be.an('Error')
+    })
+
+    it('should produce an error with a message', () => {
+      Gen.error().message.length.should.be.greaterThan(0)
+    })
+
+    it('should produce different messages on subsequent calls', () => {
+      const first = Gen.error()
+      const second = Gen.error()
+
+      first.message.should.not.eql(second.message)
+    })
+  })
 })
