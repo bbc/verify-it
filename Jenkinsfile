@@ -28,9 +28,7 @@ pipeline {
     stage('Release') {
       steps {
         script {
-          def versionLine = sh(script: 'npm ls | grep verify-it', returnStdout: true).trim()
-          def version = versionLine.split('@')[1].split(' ')[0]
-
+          def version = sh(script: 'node -e "console.log(require('./package.json').version)"', returnStdout: true).trim()
           def tagExists = sh(script: "git ls-remote --tags | grep $version", returnStdout: true).trim()
 
           if (tagExists) {
