@@ -36,6 +36,13 @@ describe('ScenarioBuilder', () => {
       body.should.have.been.calledWithExactly(value1, value2, value3)
     })
 
+    it('should create a scenario function with the correct length', () => {
+      const builder = new ScenarioBuilder()
+      const body = (arg) => null
+      const result = builder.build(body, [])
+      result.length.should.eql(1)
+    })
+
     it('should call the body function with any additional parameters supplied to the produced scenario function', () => {
       const builder = new ScenarioBuilder()
       const generatedValue = TestData.string()
@@ -48,6 +55,15 @@ describe('ScenarioBuilder', () => {
       const result = builder.build(body, [gen])
       result(runtimeValue1, runtimeValue2)
       body.should.have.been.calledWithExactly(generatedValue, runtimeValue1, runtimeValue2)
+    })
+
+    it('should create a scenario that returns the result of the body function', () => {
+      const builder = new ScenarioBuilder()
+      const bodyResult = TestData.string()
+      const body = () => bodyResult
+
+      const result = builder.build(body, [])
+      result().should.eql(bodyResult)
     })
   })
 })

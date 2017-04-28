@@ -20,4 +20,17 @@ describe('verify-it', () => {
       second.should.eql(generated2)
     }
   )
+
+  verify.it('should work correctly with promise-based tests', () => '', (value) => {
+    return Promise.reject(value).should.have.been.rejected
+  })
+
+  verify.it('should run tests with no generated values', () => {
+    'one'.should.eql('one')
+  })
+
+  verify.it('should support async tests using done', (done) => {
+    Promise.resolve('')
+      .then(() => done())
+  })
 })
