@@ -43,15 +43,15 @@ Generators are simply functions that produce a value. Several built-in generator
 const { Gen } = require('verify-it')
 ```
 
-| Function                        | Produces  | Notes |
-|---------------------------------|-----------|-------|
-| Gen.string                      | `String`  | Produces a random string between 1 and 100 characters in length |
-| Gen.fixedLengthString(length)   | `String`  | Produces a random string with a fixed length |
-| Gen.integer                     | `Number`  | Produces a random integer between `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER` |
-| Gen.real                        | `Number`  | Produces a random number between `Number.MIN_VALUE` and `Number.MAX_VALUE` |
-| Gen.object                      | `Object`  | Produces an object with randomised string keys and values |
-| Gen.objectWith(...keys)         | `Object`  | Produces an object with the supplied keys and randomised string values |
-| Gen.error                       | `Error`   | Produces an `Error` with a random message string |
-| Gen.array(generator)            | `Array`   | Produces an array with between 1 and 100 elements generated using `generator`. e.g. `Gen.array(Gen.string)` will produce an array of strings. |
-| Gen.distinct(generator, length) | `Array`   | Produces an array of length `length` with distinct values generated using `generator`. Equality is based on `===`. If distinct values cannot be generated after 10 generation attempts, an error will be thrown. |
+| Function                          | Produces  | Notes |
+|-----------------------------------|-----------|-------|
+| `Gen.string`                      | `String`  | Produces a random string between 1 and 100 characters in length |
+| `Gen.fixedLengthString(length)`   | `String`  | Produces a random string with a fixed length |
+| `Gen.integer`                     | `Number`  | Produces a random integer between `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER` |
+| `Gen.real`                        | `Number`  | Produces a random number between `Number.MIN_VALUE` and `Number.MAX_VALUE` |
+| `Gen.object`                      | `Object`  | Produces an object with randomised string keys and values |
+| `Gen.objectWith(...keys)`         | `Object`  | Produces an object with the supplied keys and randomised string values |
+| `Gen.error`                       | `Error`   | Produces an `Error` with a random message string |
+| `Gen.array(generator)`            | `Array`   | Produces an array with between 1 and 100 elements generated using `generator`. e.g. `Gen.array(Gen.string)` will produce an array of strings. |
+| `Gen.distinct(generator, length)` | `Array`   | Produces an array of length `length` with distinct values generated using `generator`. Equality is based on `===`. If distinct values cannot be generated after 10 generation attempts, an error will be thrown. |
 
