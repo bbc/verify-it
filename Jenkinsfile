@@ -7,6 +7,15 @@ pipeline {
     ansiColor('xterm')
   }
   stages {
+
+    stage('Checkout') {
+      steps {
+        script {
+          gitCheckout([ githubProjectName: 'verify-it' ])
+        }
+      }
+    }
+
     stage('Build and Test') {
       steps {
         sh '''
@@ -18,9 +27,9 @@ pipeline {
 
     stage('Release') {
       steps {
-        def versionOutput = sh(script: 'npm version', returnStdout: true).trim()
         script {
-          def jsonSlurper = new JsonSlurper()
+          def versionOutput = sh(script: 'npm version', returnStdout: true).trim()
+          def jsonSlurper = new groovy.json.JsonSlurper()
           def versionInfo = jsonSlurper.parseText(versionOutput)
           def version = versionInfo['verify-it']
 
@@ -34,12 +43,12 @@ pipeline {
         }
       }
     }
+  }
 
-    post { 
+  post { 
       always { 
         junit allowEmptyResults: true, testResults: 'test/test-reports/*.xml'
-        publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report'])
+        publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report', reportTitles: ''])
       }
     }
-  }
 }

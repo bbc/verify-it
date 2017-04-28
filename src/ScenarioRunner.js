@@ -1,6 +1,6 @@
 const ScenarioRunner = function (it, scenarioBuilder) {
   this.run = function () {
-    const args = [...arguments]
+    const args = [].slice.call(arguments)
 
     if (args.length < 2) {
       throw new Error('A description and a body function are required.')
