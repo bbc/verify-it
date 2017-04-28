@@ -20,7 +20,7 @@ const ObjectGenerators = function (random) {
       throw new Error('At least one property name must be provided')
     }
 
-    return createObject(propertyNames)
+    return () => createObject(propertyNames)
   }
 }
 

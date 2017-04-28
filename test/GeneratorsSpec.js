@@ -228,13 +228,13 @@ describe('Generators', () => {
     })
 
     it('should return an Object', () => {
-      Gen.objectWith('').should.be.an('Object')
+      Gen.objectWith('')().should.be.an('Object')
     })
 
     it('should return an object with the correct number of property names', () => {
       const numberOfProperties = TestData.integer(1, 10)
       const args = new Array(numberOfProperties).fill(1).map(() => TestData.string(30))
-      const generated = Gen.objectWith.apply(Gen, args)
+      const generated = Gen.objectWith.apply(Gen, args)()
       Object.getOwnPropertyNames(generated).length.should.eql(numberOfProperties)
     })
 
@@ -242,7 +242,7 @@ describe('Generators', () => {
       const property1 = TestData.string()
       const property2 = TestData.string()
 
-      const generated = Gen.objectWith(property1, property2)
+      const generated = Gen.objectWith(property1, property2)()
       Object.getOwnPropertyNames(generated).should.contain(property1, property2)
     })
 
@@ -250,7 +250,7 @@ describe('Generators', () => {
       const property1 = TestData.string()
       const property2 = TestData.string()
 
-      const generated = Gen.objectWith(property1, property2)
+      const generated = Gen.objectWith(property1, property2)()
       generated[property1].should.be.a('String')
       generated[property2].should.be.a('String')
     })
@@ -259,7 +259,7 @@ describe('Generators', () => {
       const property1 = TestData.string()
       const property2 = TestData.string()
 
-      const generated = Gen.objectWith(property1, property2)
+      const generated = Gen.objectWith(property1, property2)()
       generated[property1].should.not.eql(generated[property2])
     })
   })
