@@ -48,7 +48,7 @@ const { Gen } = require('verify-it')
 | `Gen.string`                      | `String`  | Produces a random string between 1 and 100 characters in length. |
 | `Gen.fixedLengthString(length)`   | `String`  | Produces a random string with a fixed length. |
 | `Gen.integer`                     | `Number`  | Produces a random integer between `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER`. |
-| `Gen.real`                        | `Number`  | Produces a random number between `Number.MIN_VALUE` and `Number.MAX_VALUE`. |
+| `Gen.real`                        | `Number`  | Produces a random number between `8E307` and `-8E307` |
 | `Gen.object`                      | `Object`  | Produces an object with randomised string keys and values. |
 | `Gen.objectWith(...keys)`         | `Object`  | Produces an object with the supplied keys and randomised string values. |
 | `Gen.error`                       | `Error`   | Produces an `Error` with a random message string. |
