@@ -29,7 +29,7 @@ pipeline {
       steps {
         script {
           def version = sh(script: '''node -e "console.log(require('./package.json').version)"''', returnStdout: true).trim()
-          def tagExists = sh(script: "git ls-remote --tags | grep $version", returnStdout: true).trim()
+          def tagExists = sh(script: "git ls-remote --tags -q git@github.com:bbc/verify-it.git $version", returnStdout: true).trim()
 
           if (tagExists) {
             echo "Release $version already exists -- skipping tagging of release"
