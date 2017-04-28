@@ -28,10 +28,8 @@ pipeline {
     stage('Release') {
       steps {
         script {
-          def versionOutput = sh(script: 'npm version', returnStdout: true).trim()
-          def jsonSlurper = new groovy.json.JsonSlurper()
-          def versionInfo = jsonSlurper.parseText(versionOutput)
-          def version = versionInfo['verify-it']
+          def versionLine = sh(script: 'npm ls | grep verify-it', returnStdout: true).trim()
+          def version = versionLine.split('@')[1].split(' ')[0]
 
           def tagExists = sh(script: "git ls-remote --tags | grep $version", returnStdout: true).trim()
 
