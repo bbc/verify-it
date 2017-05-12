@@ -14,23 +14,23 @@ describe('Generators', () => {
     })
   })
 
-  describe('fixedLengthString', () => {
+  describe('stringWithLength', () => {
     it('should throw an error if no length is provided', () => {
       const expectedMessage = 'The length of string to be generated must be provided'
-      expect(() => Gen.fixedLengthString()).to.throw(Error, expectedMessage)
+      expect(() => Gen.stringWithLength()).to.throw(Error, expectedMessage)
     })
 
     it('should produce a string', () => {
-      Gen.fixedLengthString(10)().should.be.a('String')
+      Gen.stringWithLength(10)().should.be.a('String')
     })
 
     it('should produce different values for subsequent calls', () => {
-      Gen.fixedLengthString(10)().should.not.eql(Gen.fixedLengthString(10)())
+      Gen.stringWithLength(10)().should.not.eql(Gen.stringWithLength(10)())
     })
 
     it('should produce a string of the specified length', () => {
       const length = TestData.integer(5, 10)
-      Gen.fixedLengthString(length)().should.have.length(length)
+      Gen.stringWithLength(length)().should.have.length(length)
     })
   })
 
@@ -46,14 +46,14 @@ describe('Generators', () => {
     })
   })
 
-  describe('real', () => {
+  describe('float', () => {
     it('should produce a number', () => {
-      const generated = Gen.real()
+      const generated = Gen.float()
       generated.should.be.a('Number')
     })
 
     it('should produce different values for subsequent calls', () => {
-      Gen.real().should.not.eql(Gen.real())
+      Gen.float().should.not.eql(Gen.float())
     })
   })
 
@@ -87,9 +87,9 @@ describe('Generators', () => {
       elementsWithCorrectValue.length.should.eql(generated.length)
     })
 
-    it('should generate different length arrays', () => {
+    it('should generate different length arrays when no length is provided', () => {
       const arrayGenerator = Gen.array(() => 1)
-      const generated = new Array(10).fill(0).map(() => arrayGenerator())
+      const generated = new Array(10).fill(1).map(() => arrayGenerator())
       const lengthSet = new Set(generated.map((array) => array.length))
       lengthSet.size.should.be.greaterThan(1)
     })
@@ -105,6 +105,20 @@ describe('Generators', () => {
 
       const array = Gen.array(generator)()
       array.should.eql(input.slice(0, array.length))
+    })
+
+    it('should generate fixed-length arrays when a length is provided', () => {
+      const length = TestData.integer(5, 50)
+      const arrayGenerator = Gen.array(() => 1, length)
+      arrayGenerator().should.have.length(length)
+    })
+
+    it('should use the generator function when a length is provided', () => {
+      const length = TestData.integer(5, 50)
+      const generator = spy(() => 1)
+      const arrayGenerator = Gen.array(generator, length)
+      arrayGenerator()
+      return generator.should.have.callCount(length)
     })
   })
 

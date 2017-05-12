@@ -1,10 +1,10 @@
 const NumericGenerators = function (random) {
-  const MaxRealValue = Number('8E307')
-  const MinRealValue = Number('-8E307')
+  const MaxRealValue = Number('1E10')
+  const MinRealValue = Number('-1E10')
 
   this.integer = () => random.integer(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
 
-  this.real = () => random.real(MaxRealValue, MinRealValue)
+  this.float = () => random.real(MaxRealValue, MinRealValue)
 }
 
 module.exports = NumericGenerators

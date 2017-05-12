@@ -1,4 +1,5 @@
 const { spy } = require('sinon')
+const { expect } = require('chai')
 const ScenarioBuilder = require('../src/ScenarioBuilder')
 const TestData = require('./TestData')
 
@@ -36,11 +37,26 @@ describe('ScenarioBuilder', () => {
       body.should.have.been.calledWithExactly(value1, value2, value3)
     })
 
-    it('should create a scenario function with the correct length', () => {
+    it('should create a scenario function with length 1 when the body has a single non-generated argument', () => {
       const builder = new ScenarioBuilder()
-      const body = (arg) => null
-      const result = builder.build(body, [])
+      const body = (generated1, generated2, arg) => null
+      const result = builder.build(body, [() => 1, () => 2])
       result.length.should.eql(1)
+    })
+
+    it('should create a scenario function with length 0 when only generated arguments are used', () => {
+      const builder = new ScenarioBuilder()
+      const body = (generated1, generated2) => null
+      const result = builder.build(body, [() => 1, () => 2])
+      result.length.should.eql(0)
+    })
+
+    it('should throw an error if more than one non-generated argument is required', () => {
+      const builder = new ScenarioBuilder()
+      const body = (generated1, generated2, first, second) => null
+      expect(
+        () => builder.build(body, [() => 1, () => 2])
+      ).to.throw(Error, 'Use of more than 1 non-generated scenario arguments is currently unsupported')
     })
 
     it('should call the body function with any additional parameters supplied to the produced scenario function', () => {
