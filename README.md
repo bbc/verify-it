@@ -54,3 +54,4 @@ const { Gen } = require('verify-it')
 | `Gen.error`                       | `Error`   | Produces an `Error` with a random message string. |
 | `Gen.array(generator, length)`    | `Array`   | Produces an array with `length` elements (or between 1 and 100 elements if `length` is omitted) generated using `generator`. e.g. `Gen.array(Gen.string)` will produce an array of strings. |
 | `Gen.distinct(generator, length)` | `Array`   | Produces an array of length `length` with distinct values generated using `generator`. Equality is based on `===`. If distinct values cannot be generated after 10 generation attempts, an error will be thrown. |
+| `Gen.pick(values)`                | `Any`     | Picks a random element from the supplied `values` array. |

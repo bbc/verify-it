@@ -294,4 +294,32 @@ describe('Generators', () => {
       first.message.should.not.eql(second.message)
     })
   })
+
+  describe('pick', () => {
+    it('should throw an error if no values are supplied', () => {
+      expect(Gen.pick).to.throw(Error, 'The options to be picked from must be provided')
+    })
+
+    it('should throw an error if the argument supplied is not an array', () => {
+      const values = TestData.object()
+      expect(() => Gen.pick(values)).to.throw(Error, 'The options to be picked from must be an array')
+    })
+
+    it('should throw an error if the argument supplied is empty', () => {
+      expect(() => Gen.pick([])).to.throw(Error, 'The options array must have at least one entry')
+    })
+
+    it('should pick one of the entries from the values array', () => {
+      const length = TestData.integer(5, 10)
+      const values = new Array(length).fill(1).map(TestData.string)
+      Gen.pick(values)().should.be.oneOf(values)
+    })
+
+    it('should pick different entries in subsequent calls', () => {
+      const values = new Array(10).fill(1).map(TestData.string)
+      const generated = new Array(10).fill(0).map(() => Gen.pick(values)())
+      const indexSet = new Set(generated.map((value) => values.indexOf(value)))
+      indexSet.size.should.be.greaterThan(1)
+    })
+  })
 })
