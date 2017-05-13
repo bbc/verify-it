@@ -21,6 +21,7 @@ pipeline {
         sh '''
           npm install
           npm test
+          node_modules/.bin/nsp check --output standard
         '''
       }
     }
