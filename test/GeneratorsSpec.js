@@ -12,6 +12,34 @@ describe('Generators', () => {
     it('should produce different values for subsequent calls', () => {
       Gen.string().should.not.eql(Gen.string())
     })
+
+    it('should produce different length strings for subsequent calls', () => {
+      const lengths = new Array(100).fill(0).map(() => Gen.string().length)
+      const lengthSet = new Set(lengths)
+      lengthSet.size.should.be.greaterThan(1)
+    })
+  })
+
+  describe('stringNonNumeric', () => {
+    it('should produce a string', () => {
+      Gen.stringNonNumeric().should.be.a('String')
+    })
+
+    it('should produce different values for subsequent calls', () => {
+      Gen.stringNonNumeric().should.not.eql(Gen.stringNonNumeric())
+    })
+
+    it('should not include numeric characters', () => {
+      const numerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+      new Array(100).fill(0).forEach(() => {
+        const generated = Gen.stringNonNumeric()
+        numerals.forEach((numeral) => generated.should.not.contain(numeral))
+      })
+    })
+
+    it('should not return an empty string', () => {
+      new Array(1000).fill(0).forEach(() => Gen.stringNonNumeric().should.have.length.greaterThan(0))
+    })
   })
 
   describe('stringWithLength', () => {
