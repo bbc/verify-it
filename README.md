@@ -49,7 +49,9 @@ const { Gen } = require('verify-it')
 | `Gen.stringWithLength(length)`    | `String`  | Produces a random string with a fixed length. |
 | `Gen.stringNonNumeric`            | `String`  | Produces a random string that does not contain numeric characters between 1 and 100 characters in length. |
 | `Gen.integer`                     | `Number`  | Produces a random integer between `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER`. |
+| `Gen.integerBetween(min, max)`    | `Number`  | Produces a random integer between `min` and `max`. |
 | `Gen.float`                       | `Number`  | Produces a random number between `-1E10` and `1E10` |
+| `Gen.floatBetween(min, max)`      | `Number`  | Produces a random number between `min` and `max` |
 | `Gen.object`                      | `Object`  | Produces an object with randomised string keys and values. |
 | `Gen.objectWith(...keys)`         | `Object`  | Produces an object with the supplied keys and randomised string values. |
 | `Gen.error`                       | `Error`   | Produces an `Error` with a random message string. |

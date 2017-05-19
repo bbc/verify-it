@@ -74,6 +74,79 @@ describe('Generators', () => {
     })
   })
 
+  describe('integerBetween', () => {
+    it('should throw an error if no minimum is provided', () => {
+      const min = undefined
+      const max = TestData.integer(0, 200)
+      const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the minimum is null', () => {
+      const min = null
+      const max = TestData.integer(0, 200)
+      const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if no maximum is provided', () => {
+      const min = TestData.integer(0, 200)
+      const max = undefined
+      const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the maximum is null', () => {
+      const min = TestData.integer(0, 200)
+      const max = null
+      const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the minimum is not an integer', () => {
+      const min = TestData.string()
+      const max = TestData.integer(0, 200)
+      const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the minimum value is less than Number.MIN_SAFE_INTEGER', () => {
+      const min = Number.MIN_SAFE_INTEGER - TestData.integer(1, 5)
+      const max = TestData.integer(0, 100)
+      const expectedMessage = `Minimum value must be greater than ${Number.MIN_SAFE_INTEGER}. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the maximum value is greater than Number.MAX_SAFE_INTEGER', () => {
+      const min = TestData.integer(0, 100)
+      const max = Number.MAX_SAFE_INTEGER + TestData.integer(1, 5)
+      const expectedMessage = `Maximum value must be less than ${Number.MAX_SAFE_INTEGER}. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the minimum is greater than the maximum', () => {
+      const min = TestData.integer(10, 20)
+      const max = TestData.integer(0, 9)
+      const expectedMessage = `Minimum value must be less than the maximum value. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should generate an integer between the minimum and maximum', () => {
+      const min = TestData.integer(0, 100)
+      const max = TestData.integer(101, 200)
+      const generated = Gen.integerBetween(min, max)()
+      generated.should.be.a('Number')
+      generated.should.be.greaterThan(min)
+      generated.should.be.lessThan(max)
+      return Number.isInteger(generated).should.be.true
+    })
+
+    it('should generate different integers for subsequent calls', () => {
+      const gen = Gen.integerBetween(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+      gen().should.not.eql(gen())
+    })
+  })
+
   describe('float', () => {
     it('should produce a number', () => {
       const generated = Gen.float()
@@ -82,6 +155,64 @@ describe('Generators', () => {
 
     it('should produce different values for subsequent calls', () => {
       Gen.float().should.not.eql(Gen.float())
+    })
+  })
+
+  describe('floatBetween', () => {
+    it('should throw an error if no minimum is provided', () => {
+      const min = undefined
+      const max = TestData.float(0, 200)
+      const expectedMessage = `Both the minimum and maximum values must be numbers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.floatBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the minimum is null', () => {
+      const min = null
+      const max = TestData.float(0, 200)
+      const expectedMessage = `Both the minimum and maximum values must be numbers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.floatBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if no maximum is provided', () => {
+      const min = TestData.float(0, 200)
+      const max = undefined
+      const expectedMessage = `Both the minimum and maximum values must be numbers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.floatBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the maximum is null', () => {
+      const min = TestData.float(0, 200)
+      const max = null
+      const expectedMessage = `Both the minimum and maximum values must be numbers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.floatBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the minimum is not a number', () => {
+      const min = TestData.string()
+      const max = TestData.float(0, 200)
+      const expectedMessage = `Both the minimum and maximum values must be numbers. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.floatBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should throw an error if the minimum is greater than the maximum', () => {
+      const min = TestData.float(10, 20)
+      const max = TestData.float(0, 9)
+      const expectedMessage = `Minimum value must be less than the maximum value. Provided min: ${min}, max: ${max}`
+      expect(() => Gen.floatBetween(min, max)).to.throw(Error, expectedMessage)
+    })
+
+    it('should generate a number between the minimum and maximum', () => {
+      const min = TestData.float(0, 100)
+      const max = TestData.float(101, 200)
+      const generated = Gen.floatBetween(min, max)()
+      generated.should.be.a('Number')
+      generated.should.be.greaterThan(min)
+      generated.should.be.lessThan(max)
+    })
+
+    it('should generate different numbers for subsequent calls', () => {
+      const gen = Gen.floatBetween(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+      gen().should.not.eql(gen())
     })
   })
 
