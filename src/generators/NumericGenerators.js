@@ -35,7 +35,7 @@ const NumericGenerators = function (random) {
       throw new Error(`Minimum value must be less than the maximum value. Provided min: ${min}, max: ${max}`)
     }
 
-    return () => random.real(min, max)
+    return () => random.real(min, max, true)
   }
 }
 
