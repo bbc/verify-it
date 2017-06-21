@@ -1,5 +1,21 @@
 declare var verify: VerifyIt.IVerify;
 
+declare var Gen: {
+  string: () => string
+  stringWithLength: (length: number) => (() => string)
+  stringNonNumeric: () => string
+  integer: () => number
+  integerBetween(min: number, max: number): () => number
+  float: () => number
+  floatBetween(min: number, max: number): () => number
+  object: () => object
+  objectWith(...keys: string[]): () => object
+  error: () => Error
+  array<T>(generator: () => T, length: number): (() => T[])
+  distinct<T>(generator: () => T, length: number): (() => T[])
+  pick<T>(values: T[]): () => T
+}
+
 declare namespace VerifyIt {
   interface TestDone {
     (error?: any): any;
@@ -23,21 +39,5 @@ declare namespace VerifyIt {
 
   interface ITestDefinition3 {
     <G1,G2,G3>(description: string, gen1: () => G1, gen2: () => G2, gen3: () => G3, callback: (val1: G1, val2: G2, val3: G3, done: TestDone) => any);
-  }
-
-  interface Gen {
-    string: () => string
-    stringWithLength: (length: number) => (() => string)
-    stringNonNumeric: () => string
-    integer: () => number
-    integerBetween(min: number, max: number): () => number
-    float: () => number
-    floatBetween(min: number, max: number): () => number
-    object: () => object
-    objectWith(...keys: string[]): () => object
-    error: () => Error
-    array<T>(generator: () => T, length: number): (() => T[])
-    distinct<T>(generator: () => T, length: number): (() => T[])
-    pick<T>(values: T[]): () => T
   }
 }
