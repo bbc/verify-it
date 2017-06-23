@@ -26,7 +26,7 @@ declare namespace VerifyIt {
   }
 
   interface IVerify {
-    it(description: string, callback: () => any): any
+    it(description: string, callback: (done: TestDone) => any): any
     it<T1>(description: string, gen1: () => T1, callback: (value1: T1, done: TestDone) => any): any
     it<T1, T2>(description: string, gen1: () => T1, gen2: () => T2, callback: (value1: T1, value2: T2, done: TestDone) => any): any;
     it<T1, T2, T3>(description: string, gen1: () => T1, gen2: () => T2, gen3: () => T3, callback: (value1: T1, value2: T2, value3: T3, done: TestDone) => any): any;
