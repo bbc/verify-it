@@ -21,9 +21,7 @@ declare class VerifyIt {
 }
 
 declare namespace VerifyIt {
-  interface TestDone {
-    (error?: any): any;
-  }
+  type TestDone = (error?: any) => any
 
   interface IVerify {
     it(description: string, callback: (done: TestDone) => any): any
@@ -40,5 +38,5 @@ declare namespace VerifyIt {
 }
 
 declare module "verify-it" {
-    export = VerifyIt;
+  export = VerifyIt;
 }
