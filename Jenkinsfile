@@ -19,9 +19,9 @@ pipeline {
     stage('Build and Test') {
       steps {
         sh '''
-          npm install
-          npm test
-          node_modules/.bin/nsp check --output standard
+          yarn install
+          yarn test
+          yarn check-dependencies
         '''
       }
     }
