@@ -1,10 +1,10 @@
 {
   "name": "verify-it",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Test property generation for NodeJS",
   "main": "index.js",
   "scripts": {
-    "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --reporter=html --reporter=text mocha --reporter mocha-jenkins-reporter test/*.js test/**/*.js",
+    "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/**.js --reporter=html --reporter=text mocha --reporter mocha-jenkins-reporter test/*.js test/**/*.js",
     "posttest": "standard",
     "check-dependencies": "nsp check --output standard",
     "postcheck-dependencies": "scripts/spdx-non-copyleft.js"
@@ -13,8 +13,8 @@
     "type": "git",
     "url": "git+https://github.com/bbc/verify-it.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "BBC",
+  "license": "APACHE-2.0",
   "bugs": {
     "url": "https://github.com/bbc/verify-it/issues"
   },
