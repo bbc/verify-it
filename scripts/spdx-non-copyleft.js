@@ -2,6 +2,7 @@
 
 const spdxCopyleft = require('spdx-copyleft')
 const licenseChecker = require('license-checker')
+const licenses = new Set()
 
 licenseChecker.init({
   start: '.'
@@ -10,16 +11,21 @@ licenseChecker.init({
     console.log(error)
     process.exit(1)
   } else {
-    const copyLeftDependencies = Object.keys(data)
+    const dependencyNames = Object.keys(data)
+    dependencyNames.forEach((name) => licenses.add(data[name].licenses.trim()))
+
+    const copyLeftDependencies = dependencyNames
       .filter((id) => spdxCopyleft.indexOf(data[id].licenses) > -1)
       .map((id) => `${id} - ${data[id].licenses}`)
 
     if (copyLeftDependencies.length > 0) {
       console.error('Copyleft dependencies found:')
-      console.log(copyLeftDependencies.join('\n'))
+      console.log('\t' + copyLeftDependencies.join('\t\n'))
       process.exitCode = 1
     } else {
       console.log('No copyleft dependencies found')
+      console.log('Licenses in use:')
+      console.log('\t' + new Array(...licenses).sort().join('\n\t'))
     }
   }
 })
