@@ -1,0 +1,10 @@
+.github
+.gitignore
+.nyc_output
+
+coverage
+node_modules
+scripts
+test
+Jenkinsfile
+yarn.lock
