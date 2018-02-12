@@ -2,6 +2,9 @@
 
 _Test property generation for NodeJS._
 
+<a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide"></a>
+
+
 This module provides:
 
 * Randomised property inputs for testing (delegating the actual testing to a global `it` or `test` function).
