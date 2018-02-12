@@ -25,11 +25,19 @@ const { Gen } = require('verify-it')
 
 const myGenerator = () => `My custom generated value: ${Math.random()}`
 
-describe('verify-it', () => {
+describe('The verify-it library', () => {
   verify.it('should inject randomised properties',
     Gen.string, Gen.object, myGenerator,
     (someString, someObject, someCustomValue) => {
       // Write your tests here in the usual way using the supplied randomised values...
+    }
+  )
+  
+  verify.it('should allow testing of asynchronous callbacks if the test framework supports it', () => {
+    Gen.string, Gen.object, myGenerator,
+    (someString, someObject, someCustomValue, done) => {
+      // Write some more tests here but call the done function when finished
+      done()
     }
   )
 })
