@@ -2,8 +2,9 @@
 
 _Test property generation for NodeJS._
 
-<a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide"></a>
-
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![dependencies Status](https://david-dm.org/bbc/verify-it/status.svg)](https://david-dm.org/bbc/verify-it)
+[![devDependencies Status](https://david-dm.org/bbc/verify-it/dev-status.svg)](https://david-dm.org/bbc/verify-it?type=dev)
 
 This module provides:
 
