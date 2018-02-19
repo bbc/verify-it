@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/bbc/verify-it/issues"
   },
+  "engines": {
+    "node": ">=4"
+  },
   "homepage": "https://github.com/bbc/verify-it#readme",
   "dependencies": {
     "random-js": "^1.0.8"
