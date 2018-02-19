@@ -3,6 +3,7 @@
 _Test property generation for NodeJS._
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Build Status](https://travis-ci.org/bbc/verify-it.svg?branch=master)](https://travis-ci.org/bbc/verify-it)
 [![dependencies Status](https://david-dm.org/bbc/verify-it/status.svg)](https://david-dm.org/bbc/verify-it)
 [![devDependencies Status](https://david-dm.org/bbc/verify-it/dev-status.svg)](https://david-dm.org/bbc/verify-it?type=dev)
 
