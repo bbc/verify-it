@@ -1,7 +1,13 @@
-const { expect } = require('chai')
-const { spy } = require('sinon')
-const { Gen } = require('../index.js')
+'use strict'
+
+const Chai = require('chai')
+const Sinon = require('sinon')
+const VerifyIt = require('../index.js')
 const TestData = require('./TestData')
+
+const expect = Chai.expect
+const spy = Sinon.spy
+const Gen = VerifyIt.Gen
 
 describe('Generators', () => {
   describe('string', () => {

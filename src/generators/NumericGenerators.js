@@ -1,3 +1,5 @@
+'use strict'
+
 const NumericGenerators = function (random) {
   const MaxRealValue = Number('1E10')
   const MinRealValue = Number('-1E10')

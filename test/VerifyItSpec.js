@@ -1,3 +1,5 @@
+'use-strict'
+
 require('../index.js')
 const TestData = require('./TestData')
 

@@ -1,3 +1,5 @@
+'use strict'
+
 const CombinationGenerators = function (random, maxDistinctRetries) {
   const generateDistinct = (generator, existing, remainingRetries) => {
     if (remainingRetries === 0) {
@@ -5,7 +7,7 @@ const CombinationGenerators = function (random, maxDistinctRetries) {
     }
 
     const newValue = generator()
-    if (existing.includes(newValue)) {
+    if (existing.indexOf(newValue) !== -1) {
       return generateDistinct(generator, existing, remainingRetries - 1)
     } else {
       return newValue

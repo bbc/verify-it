@@ -1,3 +1,5 @@
+'use strict'
+
 const StringGenerators = function (random) {
   const generateString = () => random.string(random.integer(1, 100))
 

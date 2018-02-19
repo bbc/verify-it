@@ -1,3 +1,5 @@
+'use strict'
+
 const ObjectGenerators = function (random) {
   const createObject = (propertyNames) => {
     const result = {}
@@ -15,7 +17,8 @@ const ObjectGenerators = function (random) {
     return createObject(propertyNames)
   }
 
-  this.objectWith = (...propertyNames) => {
+  this.objectWith = function () {
+    const propertyNames = [].slice.call(arguments)
     if (propertyNames.length === 0) {
       throw new Error('At least one property name must be provided')
     }

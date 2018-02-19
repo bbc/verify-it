@@ -1,3 +1,5 @@
+'use strict'
+
 const Random = require('random-js')
 const FunctionEnumerator = require('./util/FunctionEnumerator')
 const StringGenerators = require('./generators/StringGenerators')

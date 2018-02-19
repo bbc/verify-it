@@ -1,3 +1,5 @@
+'use strict'
+
 const ScenarioRunner = function (it, scenarioBuilder) {
   this.run = function () {
     const args = [].slice.call(arguments)

@@ -1,3 +1,5 @@
+'use-strict'
+
 const FunctionEnumerator = require('../../src/util/FunctionEnumerator')
 const TestData = require('../TestData')
 

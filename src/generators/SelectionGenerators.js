@@ -1,3 +1,5 @@
+'use strict'
+
 const SelectionGenerators = function (random) {
   this.pick = (values) => {
     if (!values) {

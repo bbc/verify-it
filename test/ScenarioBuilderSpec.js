@@ -1,7 +1,12 @@
-const { spy } = require('sinon')
-const { expect } = require('chai')
+'use strict'
+
+const Sinon = require('sinon')
+const Chai = require('chai')
 const ScenarioBuilder = require('../src/ScenarioBuilder')
 const TestData = require('./TestData')
+
+const spy = Sinon.spy
+const expect = Chai.expect
 
 describe('ScenarioBuilder', () => {
   describe('build', () => {

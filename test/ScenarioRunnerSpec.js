@@ -1,7 +1,13 @@
-const { spy, match } = require('sinon')
-const { expect } = require('chai')
+'use strict'
+
+const Sinon = require('sinon')
+const Chai = require('chai')
 const TestData = require('./TestData')
 const ScenarioRunner = require('../src/ScenarioRunner')
+
+const match = Sinon.match
+const spy = Sinon.spy
+const expect = Chai.expect
 
 describe('ScenarioRunner', () => {
   describe('run', () => {

@@ -1,3 +1,5 @@
+'use strict'
+
 const ScenarioBuilder = function () {
   const createFunctionWithCorrectArgsLength = (numberOfArgs, fn) => {
     switch (numberOfArgs) {
@@ -10,9 +12,11 @@ const ScenarioBuilder = function () {
   this.build = (body, generators) => {
     const numberOfScenarioArgs = Math.max(body.length - generators.length, 0)
 
-    const scenario = function (...args) {
+    const scenario = function (args) {
+      const argumentsArray = [].slice.call(arguments)
       const inputs = generators.map((generator) => generator())
-      return body(...inputs, ...args)
+      const bodyArguments = inputs.concat(argumentsArray)
+      return body.apply(null, bodyArguments)
     }
 
     return createFunctionWithCorrectArgsLength(numberOfScenarioArgs, scenario)
