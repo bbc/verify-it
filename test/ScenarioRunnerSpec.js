@@ -20,7 +20,7 @@ describe('ScenarioRunner', () => {
       const runner = new ScenarioRunner()
       expect(
         () => runner.run(TestData.string())
-        ).to.throw(Error, 'A description and a body function are required.')
+      ).to.throw(Error, 'A description and a body function are required.')
     })
 
     it('should call the scenario builder with the body and no generator functions if none are supplied', () => {
