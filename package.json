@@ -1,7 +1,7 @@
 {
   "name": "verify-it",
-  "version": "1.0.1",
-  "description": "Test property generation for NodeJS",
+  "version": "1.1.0",
+  "description": "Randomised test property/data generation for NodeJS",
   "main": "index.js",
   "scripts": {
     "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/**.js --reporter=html --reporter=text mocha --reporter mocha-jenkins-reporter test/*.js test/**/*.js",

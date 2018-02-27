@@ -1,6 +1,6 @@
 # `verify-it`
 
-_Test property generation for NodeJS._
+_Randomised test property/data generation for NodeJS._
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Build Status](https://travis-ci.org/bbc/verify-it.svg?branch=master)](https://travis-ci.org/bbc/verify-it)
@@ -37,7 +37,7 @@ describe('The verify-it library', () => {
       // Write your tests here in the usual way using the supplied randomised values...
     }
   )
-  
+
   verify.it('should allow testing of asynchronous callbacks if the test framework supports it', () => {
     Gen.string, Gen.object, myGenerator,
     (someString, someObject, someCustomValue, done) => {
