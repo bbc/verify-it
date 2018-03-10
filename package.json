@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/bbc/verify-it#readme",
   "dependencies": {
-    "random-js": "^1.0.8"
+    "random-js": "^1.0.8",
+    "random-words": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

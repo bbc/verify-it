@@ -1,6 +1,6 @@
 'use strict'
 
-const ObjectGenerators = function (random) {
+const ObjectGenerators = function (random, randomWords) {
   const createObject = (propertyNames) => {
     const result = {}
 
@@ -14,6 +14,12 @@ const ObjectGenerators = function (random) {
   this.object = () => {
     const numberOfProperties = random.integer(1, 10)
     const propertyNames = new Array(numberOfProperties).fill(1).map(() => random.string(20))
+    return createObject(propertyNames)
+  }
+
+  this.objectWithReadableKeys = () => {
+    const numberOfProperties = random.integer(1, 10)
+    const propertyNames = new Array(numberOfProperties).fill(1).map(() => randomWords())
     return createObject(propertyNames)
   }
 
