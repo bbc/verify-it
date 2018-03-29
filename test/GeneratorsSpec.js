@@ -419,44 +419,6 @@ describe('Generators', () => {
     })
   })
 
-  describe('objectWithReadableKeys', () => {
-    it('should produce an object', () => {
-      Gen.objectWithReadableKeys().should.be.an('Object')
-    })
-
-    it('should produce an object with some keys', () => {
-      const generated = Gen.objectWithReadableKeys()
-      Object.getOwnPropertyNames(generated).should.have.length.greaterThan(0)
-    })
-
-    it('should produce different objects on subsequent calls', () => {
-      const first = Gen.objectWithReadableKeys()
-      const second = Gen.objectWithReadableKeys()
-
-      first.should.not.eql(second)
-    })
-
-    it('should produce objects with different keys on subsequent calls', () => {
-      const first = Gen.objectWithReadableKeys()
-      const second = Gen.objectWithReadableKeys()
-
-      Object.getOwnPropertyNames(first).should.not.eql(Object.getOwnPropertyNames(second))
-    })
-
-    it('should produce objects with different numbers of keys', () => {
-      const generated = new Array(10).fill(0).map(() => Gen.objectWithReadableKeys())
-      const lengthSet = new Set(generated.map((object) => Object.getOwnPropertyNames(object).length))
-      lengthSet.size.should.be.greaterThan(1)
-    })
-
-    it('should produce objects with string values', () => {
-      const generated = Gen.objectWithReadableKeys()
-      Object.getOwnPropertyNames(generated).forEach((name) => {
-        generated[name].should.be.a('String')
-      })
-    })
-  })
-
   describe('objectWith', () => {
     it('should throw an error if no property names are supplied', () => {
       expect(() => Gen.objectWith()).to.throw(Error, 'At least one property name must be provided')

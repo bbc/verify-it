@@ -2061,13 +2061,6 @@ random-js@^1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/random-js/-/random-js-1.0.8.tgz#968fd689a6f25d6c0aac766283de2f688c9c190a"
 
-random-word@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/random-word/-/random-word-2.0.0.tgz#25ed18d5ba5a99409eaceb59dabe65b76d2ff6e9"
-  dependencies:
-    unique-random-array "^1.0.0"
-    word-list "^2.0.0"
-
 randomatic@^1.1.3:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-1.1.7.tgz#c7abe9cc8b87c0baa876b19fde83fd464797e38c"
@@ -2632,16 +2625,6 @@ uniq@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
 
-unique-random-array@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/unique-random-array/-/unique-random-array-1.0.0.tgz#42b3721c579388d8b667c93c2dbde3d5d81a9136"
-  dependencies:
-    unique-random "^1.0.0"
-
-unique-random@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/unique-random/-/unique-random-1.0.0.tgz#ce3e224c8242cd33a0e77b0d7180d77e6b62d0c4"
-
 util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
@@ -2674,10 +2657,6 @@ which@^1.1.1, which@^1.2.9, which@^1.3.0:
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
-
-word-list@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/word-list/-/word-list-2.0.0.tgz#54ddfa4aae1faa71772cfb6e9208c4d8f999363e"
 
 wordwrap@0.0.2:
   version "0.0.2"
