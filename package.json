@@ -1,6 +1,6 @@
 {
   "name": "verify-it",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Randomised test property/data generation for NodeJS",
   "keywords": [
     "testing",
