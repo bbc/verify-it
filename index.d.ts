@@ -17,6 +17,7 @@ declare class VerifyIt {
     array<T>(generator: () => T, length: number): (() => T[])
     distinct<T>(generator: () => T, length: number): (() => T[])
     pick<T>(values: T[]): () => T
+    word: () => string
   }
 }
 
