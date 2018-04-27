@@ -58,7 +58,7 @@ const { Gen } = require('verify-it')
 
 | Function                          | Produces  | Notes |
 |-----------------------------------|-----------|-------|
-| `Gen.word`                      | `String`  | Produces an english word picked at random from a word list. |
+| `Gen.word`                        | `String`  | Produces an english word picked at random from a word list. |
 | `Gen.string`                      | `String`  | Produces a random string between 1 and 100 characters in length. |
 | `Gen.stringWithLength(length)`    | `String`  | Produces a random string with a fixed length. |
 | `Gen.stringNonNumeric`            | `String`  | Produces a random string that does not contain numeric characters between 1 and 100 characters in length. |
