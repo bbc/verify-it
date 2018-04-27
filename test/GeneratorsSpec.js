@@ -10,6 +10,24 @@ const spy = Sinon.spy
 const Gen = VerifyIt.Gen
 
 describe('Generators', () => {
+  describe('word', () => {
+    it('should produce a string', () => {
+      Gen.word().should.be.a('String')
+    })
+
+    it('should produce different values for subsequent calls', () => {
+      Gen.word().should.not.eql(Gen.word())
+    })
+
+    it('should only return a single word with no spaces', () => {
+      new Array(1000).fill(0).forEach(() => Gen.word().should.not.match(/\s/))
+    })
+
+    it('should not return an empty string', () => {
+      new Array(1000).fill(0).forEach(() => Gen.word().should.have.length.greaterThan(0))
+    })
+  })
+
   describe('string', () => {
     it('should produce a string', () => {
       Gen.string().should.be.a('String')

@@ -58,6 +58,7 @@ const { Gen } = require('verify-it')
 
 | Function                          | Produces  | Notes |
 |-----------------------------------|-----------|-------|
+| `Gen.word`                      | `String`  | Produces an english word picked at random from a word list. |
 | `Gen.string`                      | `String`  | Produces a random string between 1 and 100 characters in length. |
 | `Gen.stringWithLength(length)`    | `String`  | Produces a random string with a fixed length. |
 | `Gen.stringNonNumeric`            | `String`  | Produces a random string that does not contain numeric characters between 1 and 100 characters in length. |
@@ -65,7 +66,7 @@ const { Gen } = require('verify-it')
 | `Gen.integerBetween(min, max)`    | `Number`  | Produces a random integer in the inclusive range between `min` and `max`. |
 | `Gen.float`                       | `Number`  | Produces a random number in the inclusive range between `-1E10` and `1E10` |
 | `Gen.floatBetween(min, max)`      | `Number`  | Produces a random number in the inclusive range between `min` and `max` |
-| `Gen.object`                      | `Object`  | Produces an object with randomised string keys and values. |
+| `Gen.object`                      | `Object`  | Produces an object with random word keys and randomised string values. |
 | `Gen.objectWith(...keys)`         | `Object`  | Produces an object with the supplied keys and randomised string values. |
 | `Gen.error`                       | `Error`   | Produces an `Error` with a random message string. |
 | `Gen.array(generator, length)`    | `Array`   | Produces an array with `length` elements (or between 1 and 100 elements if `length` is omitted) generated using `generator`. e.g. `Gen.array(Gen.string)` will produce an array of strings. |
