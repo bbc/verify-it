@@ -1,6 +1,6 @@
 'use strict'
 
-const wordList = require('../resources/word-list')
+const wordList = require('./nouns.json')
 
 const WordGenerators = function (random) {
   this.word = () => random.pick(wordList)
