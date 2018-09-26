@@ -9,6 +9,7 @@ const ObjectGenerators = require('./generators/ObjectGenerators')
 const ErrorGenerators = require('./generators/ErrorGenerators')
 const SelectionGenerators = require('./generators/SelectionGenerators')
 const WordGenerators = require('./generators/WordGenerators')
+const BooleanGenerators = require('./generators/BooleanGenerators')
 
 const random = new Random(Random.engines.mt19937().autoSeed())
 const stringGenerators = new StringGenerators(random)
@@ -18,6 +19,7 @@ const errorGenerators = new ErrorGenerators(random)
 const selectionGenerators = new SelectionGenerators(random)
 const wordGenerators = new WordGenerators(random)
 const objectGenerators = new ObjectGenerators(random, wordGenerators)
+const booleanGenerators = new BooleanGenerators(random)
 
 const generators = [
   stringGenerators,
@@ -26,7 +28,8 @@ const generators = [
   objectGenerators,
   errorGenerators,
   selectionGenerators,
-  wordGenerators
+  wordGenerators,
+  booleanGenerators
 ]
 
 generators.forEach((generator) => {

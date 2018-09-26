@@ -505,4 +505,16 @@ describe('Generators', () => {
       indexSet.size.should.be.greaterThan(1)
     })
   })
+
+  describe('boolean', () => {
+    it('should return a boolean value', () => {
+      Gen.boolean().should.be.oneOf([true, false])
+    })
+
+    it('should pick different entries in subsequent calls', () => {
+      const generated = new Array(10).fill(0).map(() => Gen.boolean())
+      const indexSet = new Set(generated)
+      indexSet.size.should.be.greaterThan(1)
+    })
+  })
 })

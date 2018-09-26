@@ -58,20 +58,21 @@ const { Gen } = require('verify-it')
 
 | Function                          | Produces  | Notes |
 |-----------------------------------|-----------|-------|
-| `Gen.word`                        | `String`  | Produces an english word picked at random from a word list. |
-| `Gen.string`                      | `String`  | Produces a random string between 1 and 100 characters in length. |
-| `Gen.stringWithLength(length)`    | `String`  | Produces a random string with a fixed length. |
-| `Gen.stringNonNumeric`            | `String`  | Produces a random string that does not contain numeric characters between 1 and 100 characters in length. |
-| `Gen.integer`                     | `Number`  | Produces a random integer in the inclusive range between `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER`. |
-| `Gen.integerBetween(min, max)`    | `Number`  | Produces a random integer in the inclusive range between `min` and `max`. |
-| `Gen.float`                       | `Number`  | Produces a random number in the inclusive range between `-1E10` and `1E10` |
-| `Gen.floatBetween(min, max)`      | `Number`  | Produces a random number in the inclusive range between `min` and `max` |
+| `Gen.word`                        | `string`  | Produces an english word picked at random from a word list. |
+| `Gen.string`                      | `string`  | Produces a random string between 1 and 100 characters in length. |
+| `Gen.stringWithLength(length)`    | `string`  | Produces a random string with a fixed length. |
+| `Gen.stringNonNumeric`            | `string`  | Produces a random string that does not contain numeric characters between 1 and 100 characters in length. |
+| `Gen.integer`                     | `number`  | Produces a random integer in the inclusive range between `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER`. |
+| `Gen.integerBetween(min, max)`    | `number`  | Produces a random integer in the inclusive range between `min` and `max`. |
+| `Gen.float`                       | `number`  | Produces a random number in the inclusive range between `-1E10` and `1E10` |
+| `Gen.floatBetween(min, max)`      | `number`  | Produces a random number in the inclusive range between `min` and `max` |
 | `Gen.object`                      | `Object`  | Produces an object with random word keys and randomised string values. |
 | `Gen.objectWith(...keys)`         | `Object`  | Produces an object with the supplied keys and randomised string values. |
 | `Gen.error`                       | `Error`   | Produces an `Error` with a random message string. |
+| `Gen.boolean`                     | `boolean` | Produces a random boolean value |
 | `Gen.array(generator, length)`    | `Array`   | Produces an array with `length` elements (or between 1 and 100 elements if `length` is omitted) generated using `generator`. e.g. `Gen.array(Gen.string)` will produce an array of strings. |
 | `Gen.distinct(generator, length)` | `Array`   | Produces an array of length `length` with distinct values generated using `generator`. Equality is based on `===`. If distinct values cannot be generated after 10 generation attempts, an error will be thrown. |
-| `Gen.pick(values)`                | `Any`     | Picks a random element from the supplied `values` array. |
+| `Gen.pick(values)`                | `any`     | Picks a random element from the supplied `values` array. |
 
 ## Development
 

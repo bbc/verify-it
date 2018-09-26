@@ -18,6 +18,7 @@ declare class VerifyIt {
     distinct<T>(generator: () => T, length: number): (() => T[])
     pick<T>(values: T[]): () => T
     word: () => string
+    boolean: () => boolean
   }
 }
 
