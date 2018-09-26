@@ -16,8 +16,7 @@
   "scripts": {
     "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/**.js --reporter=html --reporter=text mocha --reporter mocha-jenkins-reporter test/*.js test/**/*.js",
     "posttest": "standard",
-    "check-dependencies": "npm install && npm audit",
-    "postcheck-dependencies": "scripts/spdx-non-copyleft.js"
+    "check-dependencies": "scripts/spdx-non-copyleft.js"
   },
   "repository": {
     "type": "git",
