@@ -9,7 +9,7 @@ const integer = (min, max) => random.integer(min, max)
 
 const float = (min, max) => random.real(min, max)
 
-const object = () => {
+const object = function () {
   let keys = [].slice.call(arguments)
   if (!keys || !keys.length) {
     const numberOfKeys = random.integer(1, 20)
