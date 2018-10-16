@@ -48,7 +48,7 @@ describe('The verify-it library', () => {
 })
 ```
 
-If your test framework has a `test.only` or `it.only` function then `verify.it.only` and `verify.test.only` will also be available.
+If your test framework has `test.only` or `it.only` and `test.skip` or `test.skip` then `verify.it.only`, `verify.test.only`, `verify.it.skip`, and `verify.it.skip` will also be available.
 
 ## Generators
 

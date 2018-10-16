@@ -14,17 +14,23 @@ const findTestFunction = () => {
   return global.it || global.test
 }
 
+const addAdditionalFunction = (globalTestFunction, functionName) => {
+  const additionalFunction = globalTestFunction[functionName]
+  if (additionalFunction && typeof additionalFunction === 'function') {
+    const scenarioRunner = new ScenarioRunner(additionalFunction, scenarioBuilder)
+    global.verify.it[functionName] = scenarioRunner.run
+    global.verify.test[functionName] = scenarioRunner.run
+  }
+}
+
 const testFunction = findTestFunction()
 const scenarioRunner = new ScenarioRunner(testFunction, scenarioBuilder)
 global.verify = {}
 global.verify.it = scenarioRunner.run
 global.verify.test = global.verify.it
 
-if (testFunction.only && typeof testFunction.only === 'function') {
-  const onlyScenarioRunner = new ScenarioRunner(testFunction.only, scenarioBuilder)
-  global.verify.it.only = onlyScenarioRunner.run
-  global.verify.test.only = onlyScenarioRunner.run
-}
+addAdditionalFunction(testFunction, 'only')
+addAdditionalFunction(testFunction, 'skip')
 
 module.exports = {
   Gen: Generators

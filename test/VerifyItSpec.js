@@ -35,4 +35,14 @@ describe('verify-it', () => {
     Promise.resolve('')
       .then(() => done())
   })
+
+  verify.it.skip('should skip tests if marked', () => {
+    throw new Error('Should have been skipped')
+  })
+
+  describe.skip('when a describe block is skipped', () => {
+    verify.it('should skip entire describe blocks', () => {
+      throw new Error('Should have been skipped')
+    })
+  })
 })
