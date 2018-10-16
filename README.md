@@ -48,6 +48,8 @@ describe('The verify-it library', () => {
 })
 ```
 
+If your test framework has a `test.only` or `it.only` function then `verify.it.only` and `verify.test.only` will also be available.
+
 ## Generators
 
 Generators are simply functions that produce a value. Several built-in generators are supplied:
