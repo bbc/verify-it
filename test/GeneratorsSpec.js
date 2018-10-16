@@ -1,12 +1,10 @@
 'use strict'
 
-const Chai = require('chai')
-const Sinon = require('sinon')
+const { expect } = require('chai')
+const testdouble = require('testdouble')
 const VerifyIt = require('../index.js')
 const TestData = require('./TestData')
 
-const expect = Chai.expect
-const spy = Sinon.spy
 const Gen = VerifyIt.Gen
 
 describe('Generators', () => {
@@ -257,9 +255,12 @@ describe('Generators', () => {
     })
 
     it('should call the generator function lazily', () => {
-      const generator = spy(() => 1)
+      const generator = testdouble.constructor(() => 1)
       Gen.array(generator)
-      return generator.should.not.have.been.called
+      testdouble.verify(
+        generator(),
+        { times: 0 }
+      )
     })
 
     it('should use the values from the generator function', () => {
@@ -298,10 +299,13 @@ describe('Generators', () => {
 
     it('should use the generator function when a length is provided', () => {
       const length = TestData.integer(5, 50)
-      const generator = spy(() => 1)
+      const generator = testdouble.constructor(() => 1)
       const arrayGenerator = Gen.array(generator, length)
       arrayGenerator()
-      return generator.should.have.callCount(length)
+      testdouble.verify(
+        generator(),
+        { times: length, ignoreExtraArgs: true }
+      )
     })
   })
 
@@ -333,9 +337,12 @@ describe('Generators', () => {
     })
 
     it('should call the generator function lazily', () => {
-      const generator = spy(() => 1)
+      const generator = testdouble.constructor(() => 1)
       Gen.distinct(generator, 2)
-      return generator.should.not.have.been.called
+      testdouble.verify(
+        generator(),
+        { times: 0 }
+      )
     })
 
     it('should return the values from the generator', () => {
@@ -374,10 +381,13 @@ describe('Generators', () => {
 
     it('should limit subsequent calls to the generator to 10 if the result is always equal to the first value', () => {
       const expectedMessage = 'Could not generate distinct values using the provided generator - tried 10 times'
-      const generator = spy(() => '1')
+      const generator = testdouble.constructor(() => '1')
 
       expect(() => Gen.distinct(generator, 10)()).to.throw(Error, expectedMessage)
-      generator.should.have.callCount(11)
+      testdouble.verify(
+        generator(),
+        { times: 11 }
+      )
     })
   })
 

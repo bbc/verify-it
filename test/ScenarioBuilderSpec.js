@@ -1,28 +1,33 @@
 'use strict'
 
-const Sinon = require('sinon')
+const testdouble = require('testdouble')
 const Chai = require('chai')
 const ScenarioBuilder = require('../src/ScenarioBuilder')
 const TestData = require('./TestData')
 
-const spy = Sinon.spy
 const expect = Chai.expect
 
 describe('ScenarioBuilder', () => {
   describe('build', () => {
     it('should not call the body function', () => {
       const builder = new ScenarioBuilder()
-      const body = spy(() => null)
+      const body = testdouble.constructor(() => null)
       builder.build(body, [])
-      return body.should.not.have.been.called
+      testdouble.verify(
+        body(),
+        { times: 0 }
+      )
     })
 
     it('should produce a function that will call the the body function with no arguments if no generators are supplied', () => {
       const builder = new ScenarioBuilder()
-      const body = spy(() => null)
+      const body = testdouble.constructor(() => null)
       const result = builder.build(body, [])
       result()
-      body.should.have.been.calledWithExactly()
+      testdouble.verify(
+        body(),
+        { times: 1 }
+      )
     })
 
     it('should produce a function that will call the body function with values from the supplied generators', () => {
@@ -35,11 +40,14 @@ describe('ScenarioBuilder', () => {
       const gen2 = () => value2
       const gen3 = () => value3
 
-      const body = spy(() => null)
+      const body = testdouble.constructor(() => null)
 
       const result = builder.build(body, [gen1, gen2, gen3])
       result()
-      body.should.have.been.calledWithExactly(value1, value2, value3)
+      testdouble.verify(
+        body(value1, value2, value3),
+        { times: 1 }
+      )
     })
 
     it('should create a scenario function with length 1 when the body has a single non-generated argument', () => {
@@ -71,11 +79,14 @@ describe('ScenarioBuilder', () => {
       const runtimeValue1 = TestData.object()
       const runtimeValue2 = TestData.object()
 
-      const body = spy(() => null)
+      const body = testdouble.constructor(() => null)
 
       const result = builder.build(body, [gen])
       result(runtimeValue1, runtimeValue2)
-      body.should.have.been.calledWithExactly(generatedValue, runtimeValue1, runtimeValue2)
+      testdouble.verify(
+        body(generatedValue, runtimeValue1, runtimeValue2),
+        { times: 1 }
+      )
     })
 
     it('should create a scenario that returns the result of the body function', () => {
