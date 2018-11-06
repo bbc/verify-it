@@ -1,7 +1,7 @@
 'use strict'
 
 const Random = require('random-js')
-const FunctionEnumerator = require('./util/FunctionEnumerator')
+const enumerateFunctions = require('./function/enumerateFunctions')
 const StringGenerators = require('./generators/StringGenerators')
 const NumericGenerators = require('./generators/NumericGenerators')
 const CombinationGenerators = require('./generators/CombinationGenerators')
@@ -33,7 +33,7 @@ const generators = [
 ]
 
 generators.forEach((generator) => {
-  FunctionEnumerator.enumerate(generator).forEach((name) => {
+  enumerateFunctions(generator).forEach((name) => {
     module.exports[name] = generator[name]
   })
 })

@@ -158,8 +158,8 @@ describe('Generators', () => {
       const max = TestData.integer(101, 200)
       const generated = Gen.integerBetween(min, max)()
       generated.should.be.a('Number')
-      generated.should.be.greaterThan(min)
-      generated.should.be.lessThan(max)
+      generated.should.be.greaterThan(min - 1)
+      generated.should.be.lessThan(max + 1)
       return Number.isInteger(generated).should.be.true
     })
 

@@ -3,21 +3,21 @@
 const testdouble = require('testdouble')
 const Chai = require('chai')
 const TestData = require('./TestData')
-const ScenarioRunner = require('../src/ScenarioRunner')
+const ScenarioRunnerFactory = require('../src/ScenarioRunnerFactory')
 
 const expect = Chai.expect
 
-describe('ScenarioRunner', () => {
+describe('ScenarioRunnerFactory', () => {
   describe('run', () => {
     it('should throw an exception if no arguments are provided', () => {
-      const runner = new ScenarioRunner()
-      expect(runner.run).to.throw(Error, 'A description and a body function are required.')
+      const runFunction = ScenarioRunnerFactory.create()
+      expect(runFunction).to.throw(Error, 'A description and a body function are required.')
     })
 
     it('should throw an exception if no body function is provided', () => {
-      const runner = new ScenarioRunner()
+      const runFunction = ScenarioRunnerFactory.create()
       expect(
-        () => runner.run(TestData.string())
+        () => runFunction(TestData.string())
       ).to.throw(Error, 'A description and a body function are required.')
     })
 
@@ -26,9 +26,9 @@ describe('ScenarioRunner', () => {
       const fakeScenarioBuilder = {
         build: testdouble.constructor(() => null)
       }
-      const runner = new ScenarioRunner(() => null, fakeScenarioBuilder)
+      const runFunction = ScenarioRunnerFactory.create(() => null, fakeScenarioBuilder)
 
-      runner.run(TestData.string(), body)
+      runFunction(TestData.string(), body)
       testdouble.verify(
         fakeScenarioBuilder.build(body, []),
         { times: 1 }
@@ -42,9 +42,9 @@ describe('ScenarioRunner', () => {
       const fakeScenarioBuilder = {
         build: testdouble.constructor(() => null)
       }
-      const runner = new ScenarioRunner(() => null, fakeScenarioBuilder)
+      const runFunction = ScenarioRunnerFactory.create(() => null, fakeScenarioBuilder)
 
-      runner.run(TestData.string(), gen, body)
+      runFunction(TestData.string(), gen, body)
       testdouble.verify(
         fakeScenarioBuilder.build(body, [gen]),
         { times: 1 }
@@ -60,9 +60,9 @@ describe('ScenarioRunner', () => {
       const fakeScenarioBuilder = {
         build: testdouble.constructor(() => null)
       }
-      const runner = new ScenarioRunner(() => null, fakeScenarioBuilder)
+      const runFunction = ScenarioRunnerFactory.create(() => null, fakeScenarioBuilder)
 
-      runner.run(TestData.string(), gen1, gen2, gen3, body)
+      runFunction(TestData.string(), gen1, gen2, gen3, body)
       testdouble.verify(
         fakeScenarioBuilder.build(body, [gen1, gen2, gen3]),
         { times: 1 }
@@ -71,9 +71,9 @@ describe('ScenarioRunner', () => {
 
     it('should call the it function with the correct description', () => {
       const fakeIt = testdouble.constructor(() => null)
-      const runner = new ScenarioRunner(fakeIt, { build: () => null })
+      const runFunction = ScenarioRunnerFactory.create(fakeIt, { build: () => null })
       const description = TestData.string()
-      runner.run(description, () => null)
+      runFunction(description, () => null)
       testdouble.verify(
         fakeIt(description, testdouble.matchers.anything()),
         { times: 1 }
@@ -86,8 +86,8 @@ describe('ScenarioRunner', () => {
       const fakeScenarioBuilder = {
         build: () => scenario
       }
-      const runner = new ScenarioRunner(fakeIt, fakeScenarioBuilder)
-      runner.run(TestData.string(), () => null)
+      const runFunction = ScenarioRunnerFactory.create(fakeIt, fakeScenarioBuilder)
+      runFunction(TestData.string(), () => null)
       testdouble.verify(
         fakeIt(testdouble.matchers.anything(), scenario),
         { times: 1 }
