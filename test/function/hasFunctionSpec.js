@@ -16,10 +16,9 @@ describe('hasFunction', () => {
 
   it('returns false if the parent has a property that is not a function', () => {
     const property = TestData.string()
-    const parent = {
-      ...TestData.object(),
+    const parent = Object.assign(TestData.object(), {
       [property]: TestData.object()
-    }
+    })
 
     return hasFunction(parent, property).should.be.false
   })
