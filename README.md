@@ -11,6 +11,7 @@ This module provides:
 
 * Randomised property inputs for testing (delegating the actual testing to a global `it` or `test` function).
 * Global `verify.it` and `verify.test` functions (which are synonyms).
+* A global `verify.describe` function (delegating the actual testing to a global `describe` function).
 * A series of generator functions that can be used to generate properties.
 * Generators are simply functions that produce a value so custom generators are simple to create.
 
@@ -45,10 +46,18 @@ describe('The verify-it library', () => {
       done()
     }
   )
+
+  verify.describe('when verify.describe is used', Gen.object, (someObject) => {
+    verify.it('allows the same generated value to be shared across multiple tests',
+      Gen.object, (someOtherObject) => {
+        // Write your tests here using both someObject and someOtherObject
+      }
+    )
+  })
 })
 ```
 
-If your test framework has `test.only` or `it.only` and `test.skip` or `test.skip` then `verify.it.only`, `verify.test.only`, `verify.it.skip`, and `verify.it.skip` will also be available.
+If your test framework has `test.only` or `it.only` and `test.skip` or `test.skip` then `verify.it.only`, `verify.test.only`, `verify.it.skip`, and `verify.it.skip` will also be available. Similarly, if `describe.only` or `describe.skip` exist, `verify.describe.only` and `verify.describe.skip` will be available.
 
 ## Generators
 
@@ -84,7 +93,7 @@ const { Gen } = require('verify-it')
 
 ## Contributing
 
-See [these notes](./.github/CONTRIBUTING.md) for infomation for contributors.
+See [these notes](./.github/CONTRIBUTING.md) for information for contributors.
 
 ## License
 

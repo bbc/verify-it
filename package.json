@@ -23,7 +23,7 @@
     "url": "git+https://github.com/bbc/verify-it.git"
   },
   "author": "BBC",
-  "license": "APACHE-2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/bbc/verify-it/issues"
   },
