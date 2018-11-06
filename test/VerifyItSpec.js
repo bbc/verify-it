@@ -46,3 +46,19 @@ describe('verify-it', () => {
     })
   })
 })
+
+describe('verify.describe', () => {
+  const generated1 = TestData.object()
+
+  verify.describe('when a verify.describe block is used', () => generated1, (generated) => {
+    it('the value from the generator is passed to the inner test function', () => {
+      generated.should.eql(generated1)
+    })
+  })
+
+  verify.describe.skip('when skipped', () => {
+    it('should skip entire describe blocks', () => {
+      throw new Error('Should have been skipped')
+    })
+  })
+})
