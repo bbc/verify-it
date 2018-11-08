@@ -1,4 +1,4 @@
-const hasFunction = require('../../src/function/hasFunction')
+const { hasFunction } = require('../../dist/src/function/hasFunction')
 const TestData = require('../TestData')
 
 describe('hasFunction', () => {

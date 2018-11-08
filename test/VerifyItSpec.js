@@ -1,6 +1,6 @@
 'use-strict'
 
-require('../index.js')
+require('../dist/index.js')
 const TestData = require('./TestData')
 
 describe('verify-it', () => {
@@ -44,6 +44,11 @@ describe('verify-it', () => {
     verify.it('should skip entire describe blocks', () => {
       throw new Error('Should have been skipped')
     })
+  })
+
+  verify.it('should support this.skip()', function () {
+    this.skip()
+    throw new Error('Should have been skipped')
   })
 })
 

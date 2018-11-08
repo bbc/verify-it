@@ -1,0 +1,18 @@
+{
+  "extends": ["tslint-config-standard", "tslint-immutable"],
+  "rules": {
+    "await-promise": [true, "Bluebird"],
+    "readonly-keyword": true,
+    "no-let": true,
+    "curly": true,
+    "no-construct": true,
+    "no-implicit-dependencies": [true, "dev"],
+    "no-shadowed-variable": true,
+    "ban-types": [true, 
+      ["String", "Use string instead."],
+      ["Number", "Use number instead."],
+      ["Boolean", "Use boolean instead."],
+      ["Object", "Use object instead."]
+    ]
+  }
+}

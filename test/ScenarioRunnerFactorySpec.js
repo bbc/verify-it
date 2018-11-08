@@ -3,7 +3,7 @@
 const testdouble = require('testdouble')
 const Chai = require('chai')
 const TestData = require('./TestData')
-const ScenarioRunnerFactory = require('../src/ScenarioRunnerFactory')
+const { ScenarioRunnerFactory } = require('../dist/src/ScenarioRunnerFactory')
 
 const expect = Chai.expect
 

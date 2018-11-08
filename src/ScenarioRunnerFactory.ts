@@ -1,8 +1,7 @@
-'use strict'
+import { hasFunction } from './function/hasFunction'
+import { ScenarioBuilder } from './ScenarioBuilder'
 
-const hasFunction = require('./function/hasFunction')
-
-const buildDelegatingFunction = (it, scenarioBuilder) => {
+const buildDelegatingFunction = (it: Function, scenarioBuilder: ScenarioBuilder) => {
   return function () {
     const args = [].slice.call(arguments)
 
@@ -19,16 +18,14 @@ const buildDelegatingFunction = (it, scenarioBuilder) => {
   }
 }
 
-const ScenarioRunnerFactory = {
-  create: (it, scenarioBuilder, additionalFunctionNames = []) => {
-    const verifyItFunction = buildDelegatingFunction(it, scenarioBuilder)
+export namespace ScenarioRunnerFactory {
+  export function create (it: Function, scenarioBuilder: ScenarioBuilder, additionalFunctionNames: string[] = []) {
+    const verifyItFunction = buildDelegatingFunction(it, scenarioBuilder) as any
     additionalFunctionNames.filter((key) => hasFunction(it, key))
       .forEach((key) => {
-        const additionalFunction = it[key]
+        const additionalFunction = (it as any)[key]
         verifyItFunction[key] = buildDelegatingFunction(additionalFunction, scenarioBuilder)
       })
     return verifyItFunction
   }
 }
-
-module.exports = ScenarioRunnerFactory

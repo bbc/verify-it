@@ -2,16 +2,18 @@
 
 const testdouble = require('testdouble')
 const Chai = require('chai')
-const ScenarioBuilder = require('../src/ScenarioBuilder')
+const { ScenarioBuilder } = require('../dist/src/ScenarioBuilder')
 const TestData = require('./TestData')
 
 const expect = Chai.expect
 
 describe('ScenarioBuilder', () => {
+  const scenarioBuilder = new ScenarioBuilder()
+
   describe('build', () => {
     it('should not call the body function', () => {
       const body = testdouble.constructor(() => null)
-      ScenarioBuilder.build(body, [])
+      scenarioBuilder.build(body, [])
       testdouble.verify(
         body(),
         { times: 0 }
@@ -20,7 +22,7 @@ describe('ScenarioBuilder', () => {
 
     it('should produce a function that will call the the body function with no arguments if no generators are supplied', () => {
       const body = testdouble.constructor(() => null)
-      const result = ScenarioBuilder.build(body, [])
+      const result = scenarioBuilder.build(body, [])
       result()
       testdouble.verify(
         body(),
@@ -39,7 +41,7 @@ describe('ScenarioBuilder', () => {
 
       const body = testdouble.constructor(() => null)
 
-      const result = ScenarioBuilder.build(body, [gen1, gen2, gen3])
+      const result = scenarioBuilder.build(body, [gen1, gen2, gen3])
       result()
       testdouble.verify(
         body(value1, value2, value3),
@@ -49,20 +51,20 @@ describe('ScenarioBuilder', () => {
 
     it('should create a scenario function with length 1 when the body has a single non-generated argument', () => {
       const body = (generated1, generated2, arg) => null
-      const result = ScenarioBuilder.build(body, [() => 1, () => 2])
+      const result = scenarioBuilder.build(body, [() => 1, () => 2])
       result.length.should.eql(1)
     })
 
     it('should create a scenario function with length 0 when only generated arguments are used', () => {
       const body = (generated1, generated2) => null
-      const result = ScenarioBuilder.build(body, [() => 1, () => 2])
+      const result = scenarioBuilder.build(body, [() => 1, () => 2])
       result.length.should.eql(0)
     })
 
     it('should throw an error if more than one non-generated argument is required', () => {
       const body = (generated1, generated2, first, second) => null
       expect(
-        () => ScenarioBuilder.build(body, [() => 1, () => 2])
+        () => scenarioBuilder.build(body, [() => 1, () => 2])
       ).to.throw(Error, 'Use of more than 1 non-generated scenario arguments is currently unsupported')
     })
 
@@ -74,7 +76,7 @@ describe('ScenarioBuilder', () => {
 
       const body = testdouble.constructor(() => null)
 
-      const result = ScenarioBuilder.build(body, [gen])
+      const result = scenarioBuilder.build(body, [gen])
       result(runtimeValue1, runtimeValue2)
       testdouble.verify(
         body(generatedValue, runtimeValue1, runtimeValue2),
@@ -86,7 +88,7 @@ describe('ScenarioBuilder', () => {
       const bodyResult = TestData.string()
       const body = () => bodyResult
 
-      const result = ScenarioBuilder.build(body, [])
+      const result = scenarioBuilder.build(body, [])
       result().should.eql(bodyResult)
     })
   })

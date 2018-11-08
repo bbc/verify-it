@@ -2,7 +2,7 @@
 
 const { expect } = require('chai')
 const testdouble = require('testdouble')
-const VerifyIt = require('../index.js')
+const VerifyIt = require('../dist/index.js')
 const TestData = require('./TestData')
 
 const Gen = VerifyIt.Gen
