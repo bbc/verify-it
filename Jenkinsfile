@@ -21,7 +21,7 @@ pipeline {
         sh '''
           npm install
           npm test
-          npm check-dependencies
+          npm run-script check-dependencies
         '''
       }
     }
