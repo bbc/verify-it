@@ -1,6 +1,6 @@
 'use strict'
 
-const Random = require('random-js')
+const RandomJS = require('random-js')
 const enumerateFunctions = require('./function/enumerateFunctions')
 const StringGenerators = require('./generators/StringGenerators')
 const NumericGenerators = require('./generators/NumericGenerators')
@@ -11,7 +11,7 @@ const SelectionGenerators = require('./generators/SelectionGenerators')
 const WordGenerators = require('./generators/WordGenerators')
 const BooleanGenerators = require('./generators/BooleanGenerators')
 
-const random = new Random(Random.engines.mt19937().autoSeed())
+const random = new RandomJS.Random(RandomJS.MersenneTwister19937.autoSeed())
 const stringGenerators = new StringGenerators(random)
 const numericGenerators = new NumericGenerators(random)
 const combinationGenerators = new CombinationGenerators(random, 10)

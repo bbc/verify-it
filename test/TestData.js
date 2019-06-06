@@ -1,6 +1,6 @@
 'use strict'
 
-const Random = require('random-js')
+const { Random } = require('random-js')
 const random = new Random()
 
 const string = (length) => length ? random.string(length) : random.string(10)
