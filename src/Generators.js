@@ -10,6 +10,7 @@ const ErrorGenerators = require('./generators/ErrorGenerators')
 const SelectionGenerators = require('./generators/SelectionGenerators')
 const WordGenerators = require('./generators/WordGenerators')
 const BooleanGenerators = require('./generators/BooleanGenerators')
+const DateGenerators = require('./generators/DateGenerators')
 
 const random = new RandomJS.Random(RandomJS.MersenneTwister19937.autoSeed())
 const stringGenerators = new StringGenerators(random)
@@ -20,6 +21,7 @@ const selectionGenerators = new SelectionGenerators(random)
 const wordGenerators = new WordGenerators(random)
 const objectGenerators = new ObjectGenerators(random, wordGenerators)
 const booleanGenerators = new BooleanGenerators(random)
+const dateGenerators = new DateGenerators(random)
 
 const generators = [
   stringGenerators,
@@ -29,7 +31,8 @@ const generators = [
   errorGenerators,
   selectionGenerators,
   wordGenerators,
-  booleanGenerators
+  booleanGenerators,
+  dateGenerators
 ]
 
 generators.forEach((generator) => {
