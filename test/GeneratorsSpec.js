@@ -704,19 +704,18 @@ describe("Generators", () => {
     it("should produce a date between two dates", () => {
       const start = new Date("01-01-2001");
       const end = new Date("01-01-2011");
-      const generated = Gen.dateBetween(start, end);
+      const generated = Gen.dateBetween(start, end)();
       generated.should.be.a("Date");
       generated.should.greaterThan(new Date(start - 1));
       generated.should.lessThan(new Date(end + 1));
     });
 
     it("should generate different dates for subsequent calls", () => {
-      Gen.dateBetween(
+      const gen = Gen.dateBetween(
         new Date("01-01-2001"),
         new Date("01-01-2011")
-      ).should.not.eql(
-        Gen.dateBetween(new Date("01-01-2001"), new Date("01-01-2011"))
       );
+      gen().should.not.eql(gen());
     });
   });
 
@@ -749,15 +748,14 @@ describe("Generators", () => {
 
     it("should produce a date after the chosen date", () => {
       const start = new Date("01-01-2001");
-      const generated = Gen.dateAfter(start);
+      const generated = Gen.dateAfter(start)();
       generated.should.be.a("Date");
       generated.should.greaterThan(new Date(start - 1));
     });
 
     it("should generate different dates for subsequent calls", () => {
-      Gen.dateAfter(new Date("01-01-2001")).should.not.eql(
-        Gen.dateAfter(new Date("01-01-2001"))
-      );
+      const gen = Gen.dateAfter(new Date("01-01-2001"));
+      gen().should.not.eql(gen());
     });
   });
 
@@ -790,15 +788,14 @@ describe("Generators", () => {
 
     it("should produce a date before the chosen date", () => {
       const end = new Date("01-01-2001");
-      const generated = Gen.dateBefore(end);
+      const generated = Gen.dateBefore(end)();
       generated.should.be.a("Date");
       generated.should.lessThan(new Date(end + 1));
     });
 
     it("should generate different dates for subsequent calls", () => {
-      Gen.dateBefore(new Date("01-01-2001")).should.not.eql(
-        Gen.dateBefore(new Date("01-01-2001"))
-      );
+      const gen = Gen.dateBefore(new Date("01-01-2001"));
+      gen().should.not.eql(gen());
     });
   });
 });

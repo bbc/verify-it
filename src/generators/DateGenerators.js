@@ -28,7 +28,7 @@ const DateGenerators = function (random) {
       );
     }
 
-    return random.date(new Date(start), new Date(end));
+    return () => random.date(new Date(start), new Date(end));
   };
 
   this.dateAfter = (start) => {
@@ -46,10 +46,11 @@ const DateGenerators = function (random) {
       );
     }
 
-    return random.date(
-      new Date(start),
-      new Date(random.integer(start, Number.MAX_SAFE_INTEGER))
-    );
+    return () =>
+      random.date(
+        new Date(start),
+        new Date(random.integer(start, Number.MAX_SAFE_INTEGER))
+      );
   };
 
   this.dateBefore = (end) => {
@@ -65,7 +66,7 @@ const DateGenerators = function (random) {
       );
     }
 
-    return random.date(new Date(random.integer(0, end)), new Date(end));
+    return () => random.date(new Date(random.integer(0, end)), new Date(end));
   };
 };
 
