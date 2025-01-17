@@ -503,7 +503,7 @@ describe('Generators', () => {
     })
 
     it('should pick one of the entries from the values array', () => {
-      const length = TestData.integer(5, 10)
+      const length = TestData.integer(1, 10)
       const values = new Array(length).fill(1).map(TestData.string)
       Gen.pick(values)().should.be.oneOf(values)
     })
