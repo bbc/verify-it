@@ -4,7 +4,7 @@
 
 * Make sure that your Pull Request has a descriptive title and is documented (What does it do? Why is it needed?).
 * All new features and bug fixes *must* have tests (we encourage a Test-Driven Development wherever possible).
-* Please understand that communtity contributions are handled by the maintainers in their spare time, so a response may take several weeks
+* Please understand that community contributions are handled by the maintainers in their spare time, so a response may take several weeks
 * A PR is more likely to be merged if it fixes an [open issue](https://github.com/bbc/verify-it/issues).
 
 ### How to contribute
