@@ -14,7 +14,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/*.js --include=src/*/**.js --reporter=html --reporter=text mocha --reporter mocha-jenkins-reporter test/*.js test/**/*.js",
+    "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/*.js --include=src/*/**.js --reporter=html --reporter=text mocha test/*.js test/**/*.js",
     "posttest": "standard",
     "check-dependencies": "scripts/spdx-non-copyleft.js"
   },
@@ -35,16 +35,14 @@
     "random-js": "^2.1.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "istanbul": "^0.4.5",
+    "chai": "^4.5.0",
+    "chai-as-promised": "^7.1.2",
     "license-checker": "^25.0.1",
-    "mocha": "^6.1.4",
-    "mocha-jenkins-reporter": "^0.4.1",
-    "nyc": "^14.1.1",
-    "testdouble": "^3.11.0",
-    "spdx-copyleft": "^0.1.1",
-    "standard": "^12.0.1"
+    "mocha": "^11.0.1",
+    "nyc": "^17.1.0",
+    "spdx-copyleft": "^1.0.0",
+    "standard": "^17.1.2",
+    "testdouble": "^3.20.2"
   },
   "standard": {
     "globals": [

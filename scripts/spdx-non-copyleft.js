@@ -25,7 +25,7 @@ licenseChecker.init({
     } else {
       console.log('No copyleft dependencies found')
       console.log('Licenses in use:')
-      console.log('\t' + new Array(...licenses).sort().join('\n\t'))
+      console.log('\t' + [...licenses].sort().join('\n\t'))
     }
   }
 })
