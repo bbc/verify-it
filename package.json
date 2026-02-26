@@ -14,8 +14,9 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/*.js --include=src/*/**.js --reporter=html --reporter=text mocha test/*.js test/**/*.js",
-    "posttest": "standard",
+    "test": "npm run test:unit && npm run test:format",
+    "test:unit": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/*.js --include=src/*/**.js --reporter=html --reporter=text mocha test/*.js test/**/*.js",
+    "test:format": "prettier --write .",
     "check-dependencies": "scripts/spdx-non-copyleft.js"
   },
   "repository": {
@@ -40,8 +41,8 @@
     "license-checker": "^25.0.1",
     "mocha": "^11.0.1",
     "nyc": "^17.1.0",
+    "prettier": "^3.8.1",
     "spdx-copyleft": "^1.0.0",
-    "standard": "^17.1.2",
     "testdouble": "^3.20.2"
   },
   "standard": {

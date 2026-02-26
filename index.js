@@ -14,14 +14,22 @@ const findTestFunction = () => {
 }
 
 const testFunction = findTestFunction()
-const verifyItFunction = ScenarioRunnerFactory.create(testFunction, ScenarioBuilder, ['only', 'skip'])
+const verifyItFunction = ScenarioRunnerFactory.create(
+  testFunction,
+  ScenarioBuilder,
+  ['only', 'skip']
+)
 global.verify = {
   it: verifyItFunction,
   test: verifyItFunction
 }
 
 if (hasFunction(global, 'describe')) {
-  const verifyDescribeFunction = ScenarioRunnerFactory.create(global.describe, ScenarioBuilder, ['only', 'skip'])
+  const verifyDescribeFunction = ScenarioRunnerFactory.create(
+    global.describe,
+    ScenarioBuilder,
+    ['only', 'skip']
+  )
   global.verify.describe = verifyDescribeFunction
 }
 

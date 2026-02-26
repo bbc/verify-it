@@ -22,7 +22,9 @@ describe('Generators', () => {
     })
 
     it('should not return an empty string', () => {
-      new Array(1000).fill(0).forEach(() => Gen.word().should.have.length.greaterThan(0))
+      new Array(1000)
+        .fill(0)
+        .forEach(() => Gen.word().should.have.length.greaterThan(0))
     })
   })
 
@@ -60,13 +62,16 @@ describe('Generators', () => {
     })
 
     it('should not return an empty string', () => {
-      new Array(1000).fill(0).forEach(() => Gen.stringNonNumeric().should.have.length.greaterThan(0))
+      new Array(1000)
+        .fill(0)
+        .forEach(() => Gen.stringNonNumeric().should.have.length.greaterThan(0))
     })
   })
 
   describe('stringWithLength', () => {
     it('should throw an error if no length is provided', () => {
-      const expectedMessage = 'The length of string to be generated must be provided'
+      const expectedMessage =
+        'The length of string to be generated must be provided'
       expect(() => Gen.stringWithLength()).to.throw(Error, expectedMessage)
     })
 
@@ -101,56 +106,80 @@ describe('Generators', () => {
       const min = undefined
       const max = TestData.integer(0, 200)
       const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
-      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+      expect(() => Gen.integerBetween(min, max)).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should throw an error if the minimum is null', () => {
       const min = null
       const max = TestData.integer(0, 200)
       const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
-      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+      expect(() => Gen.integerBetween(min, max)).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should throw an error if no maximum is provided', () => {
       const min = TestData.integer(0, 200)
       const max = undefined
       const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
-      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+      expect(() => Gen.integerBetween(min, max)).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should throw an error if the maximum is null', () => {
       const min = TestData.integer(0, 200)
       const max = null
       const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
-      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+      expect(() => Gen.integerBetween(min, max)).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should throw an error if the minimum is not an integer', () => {
       const min = TestData.string()
       const max = TestData.integer(0, 200)
       const expectedMessage = `Both the minimum and maximum values must be integers. Provided min: ${min}, max: ${max}`
-      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+      expect(() => Gen.integerBetween(min, max)).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should throw an error if the minimum value is less than Number.MIN_SAFE_INTEGER', () => {
       const min = Number.MIN_SAFE_INTEGER - TestData.integer(1, 5)
       const max = TestData.integer(0, 100)
       const expectedMessage = `Minimum value must be greater than ${Number.MIN_SAFE_INTEGER}. Provided min: ${min}, max: ${max}`
-      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+      expect(() => Gen.integerBetween(min, max)).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should throw an error if the maximum value is greater than Number.MAX_SAFE_INTEGER', () => {
       const min = TestData.integer(0, 100)
       const max = Number.MAX_SAFE_INTEGER + TestData.integer(1, 5)
       const expectedMessage = `Maximum value must be less than ${Number.MAX_SAFE_INTEGER}. Provided min: ${min}, max: ${max}`
-      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+      expect(() => Gen.integerBetween(min, max)).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should throw an error if the minimum is greater than the maximum', () => {
       const min = TestData.integer(10, 20)
       const max = TestData.integer(0, 9)
       const expectedMessage = `Minimum value must be less than the maximum value. Provided min: ${min}, max: ${max}`
-      expect(() => Gen.integerBetween(min, max)).to.throw(Error, expectedMessage)
+      expect(() => Gen.integerBetween(min, max)).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should generate an integer between the minimum and maximum', () => {
@@ -164,7 +193,10 @@ describe('Generators', () => {
     })
 
     it('should generate different integers for subsequent calls', () => {
-      const gen = Gen.integerBetween(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+      const gen = Gen.integerBetween(
+        Number.MIN_SAFE_INTEGER,
+        Number.MAX_SAFE_INTEGER
+      )
       gen().should.not.eql(gen())
     })
   })
@@ -233,7 +265,10 @@ describe('Generators', () => {
     })
 
     it('should generate different numbers for subsequent calls', () => {
-      const gen = Gen.floatBetween(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+      const gen = Gen.floatBetween(
+        Number.MIN_SAFE_INTEGER,
+        Number.MAX_SAFE_INTEGER
+      )
       gen().should.not.eql(gen())
     })
   })
@@ -257,17 +292,16 @@ describe('Generators', () => {
     it('should call the generator function lazily', () => {
       const generator = testdouble.constructor(() => 1)
       Gen.array(generator)
-      testdouble.verify(
-        generator(),
-        { times: 0 }
-      )
+      testdouble.verify(generator(), { times: 0 })
     })
 
     it('should use the values from the generator function', () => {
       const value = TestData.string()
       const generator = () => value
       const generated = Gen.array(generator)()
-      const elementsWithCorrectValue = generated.filter((element) => element === value)
+      const elementsWithCorrectValue = generated.filter(
+        (element) => element === value
+      )
       elementsWithCorrectValue.length.should.eql(generated.length)
     })
 
@@ -302,10 +336,7 @@ describe('Generators', () => {
       const generator = testdouble.constructor(() => 1)
       const arrayGenerator = Gen.array(generator, length)
       arrayGenerator()
-      testdouble.verify(
-        generator(),
-        { times: length, ignoreExtraArgs: true }
-      )
+      testdouble.verify(generator(), { times: length, ignoreExtraArgs: true })
     })
   })
 
@@ -316,33 +347,41 @@ describe('Generators', () => {
     })
 
     it('should throw an error if no number of values is provided', () => {
-      const expectedMessage = 'A number of values greater than 1 must be provided'
+      const expectedMessage =
+        'A number of values greater than 1 must be provided'
       expect(() => Gen.distinct(() => null)).to.throw(Error, expectedMessage)
     })
 
     it('should throw an error if the number of values is not a number', () => {
-      const expectedMessage = 'A number of values greater than 1 must be provided'
-      expect(() => Gen.distinct(() => null, 'string')).to.throw(Error, expectedMessage)
+      const expectedMessage =
+        'A number of values greater than 1 must be provided'
+      expect(() => Gen.distinct(() => null, 'string')).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should throw an error if the number of values is a negative number', () => {
-      const expectedMessage = 'A number of values greater than 1 must be provided'
-      expect(() => Gen.distinct(() => null, -1)).to.throw(Error, expectedMessage)
+      const expectedMessage =
+        'A number of values greater than 1 must be provided'
+      expect(() => Gen.distinct(() => null, -1)).to.throw(
+        Error,
+        expectedMessage
+      )
     })
 
     it('should return a generator that returns an array of values from the generator function', () => {
       const numberOfValues = TestData.integer(5, 10)
       const generator = () => TestData.string()
-      Gen.distinct(generator, numberOfValues)().should.have.length(numberOfValues)
+      Gen.distinct(generator, numberOfValues)().should.have.length(
+        numberOfValues
+      )
     })
 
     it('should call the generator function lazily', () => {
       const generator = testdouble.constructor(() => 1)
       Gen.distinct(generator, 2)
-      testdouble.verify(
-        generator(),
-        { times: 0 }
-      )
+      testdouble.verify(generator(), { times: 0 })
     })
 
     it('should return the values from the generator', () => {
@@ -380,14 +419,15 @@ describe('Generators', () => {
     })
 
     it('should limit subsequent calls to the generator to 10 if the result is always equal to the first value', () => {
-      const expectedMessage = 'Could not generate distinct values using the provided generator - tried 10 times'
+      const expectedMessage =
+        'Could not generate distinct values using the provided generator - tried 10 times'
       const generator = testdouble.constructor(() => '1')
 
-      expect(() => Gen.distinct(generator, 10)()).to.throw(Error, expectedMessage)
-      testdouble.verify(
-        generator(),
-        { times: 11 }
+      expect(() => Gen.distinct(generator, 10)()).to.throw(
+        Error,
+        expectedMessage
       )
+      testdouble.verify(generator(), { times: 11 })
     })
   })
 
@@ -412,12 +452,16 @@ describe('Generators', () => {
       const first = Gen.object()
       const second = Gen.object()
 
-      Object.getOwnPropertyNames(first).should.not.eql(Object.getOwnPropertyNames(second))
+      Object.getOwnPropertyNames(first).should.not.eql(
+        Object.getOwnPropertyNames(second)
+      )
     })
 
     it('should produce objects with different numbers of keys', () => {
       const generated = new Array(10).fill(0).map(() => Gen.object())
-      const lengthSet = new Set(generated.map((object) => Object.getOwnPropertyNames(object).length))
+      const lengthSet = new Set(
+        generated.map((object) => Object.getOwnPropertyNames(object).length)
+      )
       lengthSet.size.should.be.greaterThan(1)
     })
 
@@ -431,7 +475,10 @@ describe('Generators', () => {
 
   describe('objectWith', () => {
     it('should throw an error if no property names are supplied', () => {
-      expect(() => Gen.objectWith()).to.throw(Error, 'At least one property name must be provided')
+      expect(() => Gen.objectWith()).to.throw(
+        Error,
+        'At least one property name must be provided'
+      )
     })
 
     it('should return an Object', () => {
@@ -440,9 +487,13 @@ describe('Generators', () => {
 
     it('should return an object with the correct number of property names', () => {
       const numberOfProperties = TestData.integer(1, 10)
-      const args = new Array(numberOfProperties).fill(1).map(() => TestData.string(30))
+      const args = new Array(numberOfProperties)
+        .fill(1)
+        .map(() => TestData.string(30))
       const generated = Gen.objectWith.apply(Gen, args)()
-      Object.getOwnPropertyNames(generated).length.should.eql(numberOfProperties)
+      Object.getOwnPropertyNames(generated).length.should.eql(
+        numberOfProperties
+      )
     })
 
     it('should return an object with the required property names', () => {
@@ -490,16 +541,25 @@ describe('Generators', () => {
 
   describe('pick', () => {
     it('should throw an error if no values are supplied', () => {
-      expect(Gen.pick).to.throw(Error, 'The options to be picked from must be provided')
+      expect(Gen.pick).to.throw(
+        Error,
+        'The options to be picked from must be provided'
+      )
     })
 
     it('should throw an error if the argument supplied is not an array', () => {
       const values = TestData.object()
-      expect(() => Gen.pick(values)).to.throw(Error, 'The options to be picked from must be an array')
+      expect(() => Gen.pick(values)).to.throw(
+        Error,
+        'The options to be picked from must be an array'
+      )
     })
 
     it('should throw an error if the argument supplied is empty', () => {
-      expect(() => Gen.pick([])).to.throw(Error, 'The options array must have at least one entry')
+      expect(() => Gen.pick([])).to.throw(
+        Error,
+        'The options array must have at least one entry'
+      )
     })
 
     it('should pick one of the entries from the values array', () => {

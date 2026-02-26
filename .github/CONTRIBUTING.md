@@ -2,15 +2,15 @@
 
 ### Guidelines for contributions
 
-* Make sure that your Pull Request has a descriptive title and is documented (What does it do? Why is it needed?).
-* All new features and bug fixes *must* have tests (we encourage a Test-Driven Development wherever possible).
-* Please understand that community contributions are handled by the maintainers in their spare time, so a response may take several weeks
-* A PR is more likely to be merged if it fixes an [open issue](https://github.com/bbc/verify-it/issues).
+- Make sure that your Pull Request has a descriptive title and is documented (What does it do? Why is it needed?).
+- All new features and bug fixes _must_ have tests (we encourage a Test-Driven Development wherever possible).
+- Please understand that community contributions are handled by the maintainers in their spare time, so a response may take several weeks
+- A PR is more likely to be merged if it fixes an [open issue](https://github.com/bbc/verify-it/issues).
 
 ### How to contribute
 
-* Fork bbc/verify-it:master and make your changes.
-* Commits should be small, self-contained logical units and should have meaningful messages.
-* Check that the tests and code-style checks pass using `yarn test`.
-* Check that you haven't compromised security or licensing restrictions using `yarn check-dependencies`.
-* When writing the title of your Pull Request, if you have to pause to add an 'and' anywhere in the title it should be two pull requests.
+- Fork bbc/verify-it:master and make your changes.
+- Commits should be small, self-contained logical units and should have meaningful messages.
+- Check that the tests and code-style checks pass using `yarn test`.
+- Check that you haven't compromised security or licensing restrictions using `yarn check-dependencies`.
+- When writing the title of your Pull Request, if you have to pause to add an 'and' anywhere in the title it should be two pull requests.
