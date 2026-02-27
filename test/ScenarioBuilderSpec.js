@@ -1,3 +1,5 @@
+'use strict'
+
 const { describe, it, mock } = require('node:test')
 const ScenarioBuilder = require('../src/ScenarioBuilder')
 const TestData = require('./TestData')

@@ -1,4 +1,4 @@
-'use-strict'
+'use strict'
 
 const { describe, it } = require('node:test')
 require('../index.js')

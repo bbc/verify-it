@@ -1,3 +1,5 @@
+'use strict'
+
 const { describe, it } = require('node:test')
 const getFunction = require('../../src/function/getFunction')
 const TestData = require('../TestData')
