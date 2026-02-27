@@ -42,11 +42,17 @@ describe('verify-it', () => {
   )
 
   verify.it('should not allow mutation of the global verify object', () => {
-    delete verify.it
-    assert.ok(verify.it)
-    verify.other = 'test'
+    assert.throws(() => (verify.other = 'test'))
     assert.equal(verify.other, undefined)
   })
+
+  verify.it(
+    'should not allow property deletion of the global verify object',
+    () => {
+      assert.throws(() => delete verify.it)
+      assert.ok(verify.it)
+    }
+  )
 
   verify.it('should support hasOwn on global verify object', () => {
     assert.equal('it' in verify, true)
