@@ -33,11 +33,11 @@ describe('ScenarioRunnerFactory', () => {
       )
 
       runFunction(TestData.string(), body)
+      t.assert.strictEqual(fakeScenarioBuilder.build.mock.calls.length, 1)
       t.assert.deepEqual(fakeScenarioBuilder.build.mock.calls[0].arguments, [
         body,
         []
       ])
-      t.assert.strictEqual(fakeScenarioBuilder.build.mock.calls.length, 1)
     })
 
     it('should call the scenario builder with a single element array if one generator function is provided', (t) => {
@@ -53,11 +53,11 @@ describe('ScenarioRunnerFactory', () => {
       )
 
       runFunction(TestData.string(), gen, body)
+      t.assert.strictEqual(fakeScenarioBuilder.build.mock.calls.length, 1)
       t.assert.deepEqual(fakeScenarioBuilder.build.mock.calls[0].arguments, [
         body,
         [gen]
       ])
-      t.assert.strictEqual(fakeScenarioBuilder.build.mock.calls.length, 1)
     })
 
     it('should call the scenario builder with a multiple element array if multiple generator functions are provided', (t) => {
@@ -75,11 +75,11 @@ describe('ScenarioRunnerFactory', () => {
       )
 
       runFunction(TestData.string(), gen1, gen2, gen3, body)
+      t.assert.strictEqual(fakeScenarioBuilder.build.mock.calls.length, 1)
       t.assert.deepEqual(fakeScenarioBuilder.build.mock.calls[0].arguments, [
         body,
         [gen1, gen2, gen3]
       ])
-      t.assert.strictEqual(fakeScenarioBuilder.build.mock.calls.length, 1)
     })
 
     it('should call the it function with the correct description', (t) => {
@@ -89,9 +89,9 @@ describe('ScenarioRunnerFactory', () => {
       })
       const description = TestData.string()
       runFunction(description, () => null)
-      t.assert.strictEqual(fakeIt.mock.calls[0].arguments[0], description)
-      t.assert.strictEqual(fakeIt.mock.calls[0].arguments.length, 2)
       t.assert.strictEqual(fakeIt.mock.calls.length, 1)
+      t.assert.strictEqual(fakeIt.mock.calls[0].arguments.length, 2)
+      t.assert.strictEqual(fakeIt.mock.calls[0].arguments[0], description)
     })
 
     it('should call the it function with the result of the scenario builder', (t) => {
@@ -105,9 +105,9 @@ describe('ScenarioRunnerFactory', () => {
         fakeScenarioBuilder
       )
       runFunction(TestData.string(), () => null)
-      t.assert.strictEqual(fakeIt.mock.calls[0].arguments[1], scenario)
-      t.assert.strictEqual(fakeIt.mock.calls[0].arguments.length, 2)
       t.assert.strictEqual(fakeIt.mock.calls.length, 1)
+      t.assert.strictEqual(fakeIt.mock.calls[0].arguments.length, 2)
+      t.assert.strictEqual(fakeIt.mock.calls[0].arguments[1], scenario)
     })
   })
 })
