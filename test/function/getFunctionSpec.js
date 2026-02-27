@@ -1,34 +1,36 @@
-const { expect } = require('chai')
+'use strict'
+
+const { describe, it } = require('node:test')
 const getFunction = require('../../src/function/getFunction')
 const TestData = require('../TestData')
 
 describe('getFunction', () => {
-  it('returns null if the parent is undefined', () => {
-    expect(getFunction()).to.be.null
+  it('returns null if the parent is undefined', (t) => {
+    t.assert.strictEqual(getFunction(), null)
   })
 
-  it('returns null if the parent is null', () => {
-    expect(getFunction(null, TestData.string())).to.be.null
+  it('returns null if the parent is null', (t) => {
+    t.assert.strictEqual(getFunction(null, TestData.string()), null)
   })
 
-  it('returns null if the parent has no function parameters', () => {
-    expect(getFunction({}, TestData.string())).to.be.null
+  it('returns null if the parent has no function parameters', (t) => {
+    t.assert.strictEqual(getFunction({}, TestData.string()), null)
   })
 
-  it('returns null if the parent has a property that is not a function', () => {
+  it('returns null if the parent has a property that is not a function', (t) => {
     const property = TestData.string()
     const parent = Object.assign(TestData.object(), {
       [property]: TestData.object()
     })
-    expect(getFunction(parent, property)).to.be.null
+    t.assert.strictEqual(getFunction(parent, property), null)
   })
 
-  it('returns the correct function if the parent has a property that is a function', () => {
+  it('returns the correct function if the parent has a property that is a function', (t) => {
     const property = TestData.string()
     const parent = Object.assign(TestData.object(), {
       [property]: () => undefined
     })
     const expected = parent[property]
-    expect(getFunction(parent, property)).to.equal(expected)
+    t.assert.strictEqual(getFunction(parent, property), expected)
   })
 })

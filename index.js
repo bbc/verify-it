@@ -18,7 +18,9 @@ const findTestFunction = (options) => {
     return testFunction
   }
 
-  throw new Error('An it or test function is required')
+  throw new Error(
+    'verify-it must be initialised with an it or test function, either by passing it to the init function or by defining a global it or test function'
+  )
 }
 
 const init = (options) => {
