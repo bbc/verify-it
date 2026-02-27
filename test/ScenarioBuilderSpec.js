@@ -57,10 +57,10 @@ describe('ScenarioBuilder', () => {
       t.assert.strictEqual(result.length, 0)
     })
 
-    it('should throw an error if more than two non-generated arguments are required', () => {
+    it('should throw an error if more than two non-generated arguments are required', (t) => {
       const body = (generated1, generated2, first, second, third) => null
       t.assert.throws(
-        () => ScenarioBuilder.build(body, [() => 1, () => 2, () => 3]),
+        () => ScenarioBuilder.build(body, [() => 1, () => 2]),
         new Error(
           'Use of more than 2 non-generated scenario arguments is currently unsupported'
         )
