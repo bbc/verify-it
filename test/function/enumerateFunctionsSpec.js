@@ -1,19 +1,20 @@
 'use-strict'
 
+const { describe, it } = require('node:test')
 const enumerateFunctions = require('../../src/function/enumerateFunctions')
 const TestData = require('../TestData')
 
 describe('enumerateFunctions', () => {
-  it('should return an empty array when an empty object is provided', () => {
-    enumerateFunctions({}).should.eql([])
+  it('should return an empty array when an empty object is provided', (t) => {
+    t.assert.deepStrictEqual(enumerateFunctions({}), [])
   })
 
-  it('should return an empty array when an object with no function properties is provided', () => {
+  it('should return an empty array when an object with no function properties is provided', (t) => {
     const object = TestData.object()
-    enumerateFunctions(object).should.eql([])
+    t.assert.deepStrictEqual(enumerateFunctions(object), [])
   })
 
-  it('should return an array of function property names', () => {
+  it('should return an array of function property names', (t) => {
     const function1 = TestData.string()
     const function2 = TestData.string()
 
@@ -23,6 +24,8 @@ describe('enumerateFunctions', () => {
       [TestData.string()]: TestData.string()
     }
 
-    enumerateFunctions(object).should.contain(function1, function2)
+    const result = enumerateFunctions(object)
+    t.assert.ok(result.includes(function1))
+    t.assert.ok(result.includes(function2))
   })
 })

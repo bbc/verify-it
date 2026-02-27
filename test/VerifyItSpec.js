@@ -1,7 +1,31 @@
 'use-strict'
 
-require('../index.js')
+const test = require('node:test')
+const assert = require('node:assert')
 const TestData = require('./TestData')
+const { Gen } = require('../index.js')
+
+// Mimic test framework behaviour where done is the first callback argument
+const delegateToIt = (name, callback, itFunction) => {
+  if (callback.length === 0) {
+    return itFunction(name, callback)
+  }
+
+  return itFunction(name, (_, done) => {
+    return callback(done)
+  })
+}
+
+const delegatedIt = (name, callback) => {
+  return delegateToIt(name, callback, test.it)
+}
+
+delegatedIt.skip = (name, callback) => {
+  return delegateToIt(name, callback, test.it.skip)
+}
+
+global.it = delegatedIt
+global.describe = test.describe
 
 describe('verify-it', () => {
   const generated1 = TestData.object()
@@ -12,8 +36,8 @@ describe('verify-it', () => {
     () => generated1,
     () => generated2,
     (first, second) => {
-      first.should.eql(generated1)
-      second.should.eql(generated2)
+      assert.equal(first, generated1)
+      assert.equal(second, generated2)
     }
   )
 
@@ -22,21 +46,21 @@ describe('verify-it', () => {
     () => generated1,
     () => generated2,
     (first, second) => {
-      first.should.eql(generated1)
-      second.should.eql(generated2)
+      assert.equal(first, generated1)
+      assert.equal(second, generated2)
     }
   )
 
   verify.it(
     'should work correctly with promise-based tests',
-    () => '',
-    (value) => {
-      return Promise.reject(value).should.have.been.rejected
+    Gen.error,
+    async (error) => {
+      await assert.rejects(() => Promise.reject(error), error)
     }
   )
 
   verify.it('should run tests with no generated values', () => {
-    'one'.should.eql('one')
+    assert.equal('one', 'one')
   })
 
   verify.it('should support async tests using done', (done) => {
@@ -62,7 +86,7 @@ describe('verify.describe', () => {
     () => generated1,
     (generated) => {
       it('the value from the generator is passed to the inner test function', () => {
-        generated.should.eql(generated1)
+        assert.equal(generated, generated1)
       })
     }
   )
