@@ -71,15 +71,13 @@ describe('The verify-it library', () => {
 
   verify.it(
     'should allow testing of asynchronous callbacks if the test framework supports it',
-    () => {
-      ;(Gen.string,
-        Gen.object,
-        myGenerator,
-        (someString, someObject, someCustomValue, t, done) => {
-          // Write some more tests here but call the done function when finished
-          t.assert.equal(true, true)
-          done()
-        })
+    Gen.string,
+    Gen.object,
+    myGenerator,
+    (someString, someObject, someCustomValue, t, done) => {
+      // Write some more tests here but call the done function when finished
+      t.assert.equal(true, true)
+      done()
     }
   )
 
@@ -123,14 +121,12 @@ describe('The verify-it library', () => {
 
   verify.it(
     'should allow testing of asynchronous callbacks if the test framework supports it',
-    () => {
-      ;(Gen.string,
-        Gen.object,
-        myGenerator,
-        (someString, someObject, someCustomValue, done) => {
-          // Write some more tests here but call the done function when finished
-          done()
-        })
+    Gen.string,
+    Gen.object,
+    myGenerator,
+    (someString, someObject, someCustomValue, done) => {
+      // Write some more tests here but call the done function when finished
+      done()
     }
   )
 
