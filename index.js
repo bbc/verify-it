@@ -48,13 +48,23 @@ const init = (options) => {
   return verify
 }
 
+let globalVerify = null
+
+const SUPPORTED_PROPERTIES = ['it', 'test', 'describe']
+
 global.verify = new Proxy(
   {},
   {
+    has: (_, prop) => SUPPORTED_PROPERTIES.includes(prop),
+    set: () => false,
+    deleteProperty: () => false,
     get: (_, prop) => {
-      if (prop === 'it' || prop === 'test' || prop === 'describe') {
-        const verify = init(global)
-        return verify[prop]
+      if (SUPPORTED_PROPERTIES.includes(prop)) {
+        if (!globalVerify) {
+          globalVerify = init(global)
+        }
+
+        return globalVerify[prop]
       }
     }
   }
