@@ -18,7 +18,7 @@
     "test:unit": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/*.js --include=src/*/**.js --reporter=html --reporter=text mocha test/*.js test/**/*.js",
     "test:unit-native": "node --test test/NativeTestingLibrary.spec.js",
     "test:format": "prettier --write .",
-    "test:types": "tsc test/types/*.spec.ts",
+    "test:types": "tsc",
     "test:docs": "typescript-docs-verifier",
     "check-dependencies": "scripts/spdx-non-copyleft.js"
   },

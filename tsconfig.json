@@ -2,5 +2,6 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "noEmit": true
-  }
+  },
+  "include": ["src/**/*.js", "test/**/*.ts"]
 }

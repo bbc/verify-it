@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert'
-import { Gen, init } from '../../'
+import { Gen, init } from '../..'
 import mocha from 'mocha'
 
 // Auto-initialisation if global.it or global.test exist
