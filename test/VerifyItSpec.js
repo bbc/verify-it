@@ -54,7 +54,7 @@ describe('verify-it', () => {
     }
   )
 
-  verify.it('should support hasOwn on global verify object', () => {
+  verify.it('should support key existence checks on the global verify object', () => {
     assert.equal('it' in verify, true)
   })
 
