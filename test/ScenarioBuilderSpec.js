@@ -12,7 +12,7 @@ describe('ScenarioBuilder', () => {
       t.assert.strictEqual(body.mock.calls.length, 0)
     })
 
-    it('should produce a function that will call the the body function with no arguments if no generators are supplied', (t) => {
+    it('should produce a function that will call the body function with no arguments if no generators are supplied', (t) => {
       const body = mock.fn(() => null)
       const result = ScenarioBuilder.build(body, [])
       result()
