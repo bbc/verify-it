@@ -1,6 +1,6 @@
 {
   "name": "verify-it",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "description": "Randomised test property/data generation for NodeJS",
   "keywords": [
     "testing",
@@ -13,10 +13,14 @@
     "generator"
   ],
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "test": "npm run test:unit && npm run test:format",
+    "test": "npm run test:unit && npm run test:unit-native && npm run test:format && npm run test:types && npm run test:docs && npm run check-dependencies",
     "test:unit": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/*.js --include=src/*/**.js --reporter=html --reporter=text mocha test/*.js test/**/*.js",
+    "test:unit-native": "node --test test/NativeTestingLibrary.spec.js",
     "test:format": "prettier --write .",
+    "test:types": "tsc",
+    "test:docs": "typescript-docs-verifier",
     "check-dependencies": "scripts/spdx-non-copyleft.js"
   },
   "repository": {
@@ -36,21 +40,18 @@
     "random-js": "^2.1.0"
   },
   "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.10.15",
     "chai": "^4.5.0",
     "chai-as-promised": "^7.1.2",
     "license-checker": "^25.0.1",
-    "mocha": "^11.0.1",
+    "mocha": "^11.7.5",
     "nyc": "^17.1.0",
     "prettier": "^3.8.1",
     "spdx-copyleft": "^1.0.0",
-    "testdouble": "^3.20.2"
-  },
-  "standard": {
-    "globals": [
-      "describe",
-      "it",
-      "verify"
-    ]
+    "testdouble": "^3.20.2",
+    "typescript": "^5.9.3",
+    "typescript-docs-verifier": "^3.0.1"
   },
   "files": [
     "src",

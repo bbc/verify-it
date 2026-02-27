@@ -1,6 +1,6 @@
 'use strict'
 
-const hasFunction = require('./function/hasFunction')
+const getFunction = require('./function/getFunction')
 
 const buildDelegatingFunction = (it, scenarioBuilder) => {
   return function () {
@@ -22,15 +22,15 @@ const buildDelegatingFunction = (it, scenarioBuilder) => {
 const ScenarioRunnerFactory = {
   create: (it, scenarioBuilder, additionalFunctionNames = []) => {
     const verifyItFunction = buildDelegatingFunction(it, scenarioBuilder)
-    additionalFunctionNames
-      .filter((key) => hasFunction(it, key))
-      .forEach((key) => {
-        const additionalFunction = it[key]
+    additionalFunctionNames.forEach((key) => {
+      const additionalFunction = getFunction(it, key)
+      if (additionalFunction) {
         verifyItFunction[key] = buildDelegatingFunction(
           additionalFunction,
           scenarioBuilder
         )
-      })
+      }
+    })
     return verifyItFunction
   }
 }

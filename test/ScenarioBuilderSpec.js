@@ -44,17 +44,23 @@ describe('ScenarioBuilder', () => {
       result.length.should.eql(1)
     })
 
+    it('should create a scenario function with length 2 when the body has two non-generated arguments', () => {
+      const body = (generated1, generated2, arg1, arg2) => null
+      const result = ScenarioBuilder.build(body, [() => 1, () => 2])
+      result.length.should.eql(2)
+    })
+
     it('should create a scenario function with length 0 when only generated arguments are used', () => {
       const body = (generated1, generated2) => null
       const result = ScenarioBuilder.build(body, [() => 1, () => 2])
       result.length.should.eql(0)
     })
 
-    it('should throw an error if more than one non-generated argument is required', () => {
-      const body = (generated1, generated2, first, second) => null
+    it('should throw an error if more than two non-generated arguments are required', () => {
+      const body = (generated1, generated2, first, second, third) => null
       expect(() => ScenarioBuilder.build(body, [() => 1, () => 2])).to.throw(
         Error,
-        'Use of more than 1 non-generated scenario arguments is currently unsupported'
+        'Use of more than 2 non-generated scenario arguments is currently unsupported'
       )
     })
 
