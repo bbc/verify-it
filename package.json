@@ -13,6 +13,7 @@
     "generator"
   ],
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "npm run test:unit && npm run test:unit-native && npm run test:format && npm run test:types && npm run test:docs && npm run check-dependencies",
     "test:unit": "JUNIT_REPORT_PATH=test/test-reports/report.xml nyc --all --include=index.js --include=src/*.js --include=src/*/**.js --reporter=html --reporter=text mocha test/*.js test/**/*.js",
