@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('node:test')
-const assert = require('node:assert')
+const assert = require('node:assert/strict')
 const TestData = require('./TestData')
 const { Gen } = require('../index.js')
 
@@ -54,9 +54,12 @@ describe('verify-it', () => {
     }
   )
 
-  verify.it('should support key existence checks on the global verify object', () => {
-    assert.equal('it' in verify, true)
-  })
+  verify.it(
+    'should support key existence checks on the global verify object',
+    () => {
+      assert.equal('it' in verify, true)
+    }
+  )
 
   verify.test(
     'should generate values using the supplied functions using verify.test',
