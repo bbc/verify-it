@@ -22,7 +22,7 @@ const findTestFunction = (options) => {
 }
 
 const init = (options) => {
-  const testFunction = findTestFunction(options ?? global)
+  const testFunction = findTestFunction(options)
 
   const verifyItFunction = ScenarioRunnerFactory.create(
     testFunction,
