@@ -23,11 +23,12 @@ describe('getFunction', () => {
     expect(getFunction(parent, property)).to.be.null
   })
 
-  it('returns true if the parent has a property that is a function', () => {
+  it('returns the correct function if the parent has a property that is a function', () => {
     const property = TestData.string()
     const parent = Object.assign(TestData.object(), {
       [property]: () => undefined
     })
-    expect(getFunction(parent, property)).to.equal(parent[property])
+    const expected = parent[property]
+    expect(getFunction(parent, property)).to.equal(expected)
   })
 })
