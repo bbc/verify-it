@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Deprecated global `verify` object in favour of explicit initialisation using `init`
+- Errors due to missing global `it` and `test` functions are only thrown when the global `verify` object is used (previously an error would be thrown immediately when this library was imported)
 
 [Unreleased]: https://github.com/bbc/gobbc/compare/v2.4.0...HEAD
 [2.4.0]: https://github.com/bbc/gobbc/compare/v2.4.0...v2.3.3
