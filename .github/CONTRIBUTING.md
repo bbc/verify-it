@@ -11,6 +11,6 @@
 
 - Fork bbc/verify-it:master and make your changes.
 - Commits should be small, self-contained logical units and should have meaningful messages.
-- Check that the tests and code-style checks pass using `yarn test`.
-- Check that you haven't compromised security or licensing restrictions using `yarn check-dependencies`.
+- Check that the tests and code-style checks pass using `npm test`.
+- Check that you haven't compromised security or licensing restrictions using `npm check-dependencies`.
 - When writing the title of your Pull Request, if you have to pause to add an 'and' anywhere in the title it should be two pull requests.
