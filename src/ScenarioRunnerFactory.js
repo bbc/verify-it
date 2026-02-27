@@ -22,10 +22,14 @@ const buildDelegatingFunction = (it, scenarioBuilder) => {
 const ScenarioRunnerFactory = {
   create: (it, scenarioBuilder, additionalFunctionNames = []) => {
     const verifyItFunction = buildDelegatingFunction(it, scenarioBuilder)
-    additionalFunctionNames.filter((key) => hasFunction(it, key))
+    additionalFunctionNames
+      .filter((key) => hasFunction(it, key))
       .forEach((key) => {
         const additionalFunction = it[key]
-        verifyItFunction[key] = buildDelegatingFunction(additionalFunction, scenarioBuilder)
+        verifyItFunction[key] = buildDelegatingFunction(
+          additionalFunction,
+          scenarioBuilder
+        )
       })
     return verifyItFunction
   }

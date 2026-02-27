@@ -3,7 +3,9 @@
 const CombinationGenerators = function (random, maxDistinctRetries) {
   const generateDistinct = (generator, existing, remainingRetries) => {
     if (remainingRetries === 0) {
-      throw new Error(`Could not generate distinct values using the provided generator - tried ${maxDistinctRetries} times`)
+      throw new Error(
+        `Could not generate distinct values using the provided generator - tried ${maxDistinctRetries} times`
+      )
     }
 
     const newValue = generator()

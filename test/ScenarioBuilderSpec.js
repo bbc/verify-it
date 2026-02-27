@@ -12,20 +12,14 @@ describe('ScenarioBuilder', () => {
     it('should not call the body function', () => {
       const body = testdouble.constructor(() => null)
       ScenarioBuilder.build(body, [])
-      testdouble.verify(
-        body(),
-        { times: 0 }
-      )
+      testdouble.verify(body(), { times: 0 })
     })
 
     it('should produce a function that will call the the body function with no arguments if no generators are supplied', () => {
       const body = testdouble.constructor(() => null)
       const result = ScenarioBuilder.build(body, [])
       result()
-      testdouble.verify(
-        body(),
-        { times: 1 }
-      )
+      testdouble.verify(body(), { times: 1 })
     })
 
     it('should produce a function that will call the body function with values from the supplied generators', () => {
@@ -41,10 +35,7 @@ describe('ScenarioBuilder', () => {
 
       const result = ScenarioBuilder.build(body, [gen1, gen2, gen3])
       result()
-      testdouble.verify(
-        body(value1, value2, value3),
-        { times: 1 }
-      )
+      testdouble.verify(body(value1, value2, value3), { times: 1 })
     })
 
     it('should create a scenario function with length 1 when the body has a single non-generated argument', () => {
@@ -61,9 +52,10 @@ describe('ScenarioBuilder', () => {
 
     it('should throw an error if more than one non-generated argument is required', () => {
       const body = (generated1, generated2, first, second) => null
-      expect(
-        () => ScenarioBuilder.build(body, [() => 1, () => 2])
-      ).to.throw(Error, 'Use of more than 1 non-generated scenario arguments is currently unsupported')
+      expect(() => ScenarioBuilder.build(body, [() => 1, () => 2])).to.throw(
+        Error,
+        'Use of more than 1 non-generated scenario arguments is currently unsupported'
+      )
     })
 
     it('should call the body function with any additional parameters supplied to the produced scenario function', () => {
@@ -76,10 +68,9 @@ describe('ScenarioBuilder', () => {
 
       const result = ScenarioBuilder.build(body, [gen])
       result(runtimeValue1, runtimeValue2)
-      testdouble.verify(
-        body(generatedValue, runtimeValue1, runtimeValue2),
-        { times: 1 }
-      )
+      testdouble.verify(body(generatedValue, runtimeValue1, runtimeValue2), {
+        times: 1
+      })
     })
 
     it('should create a scenario that returns the result of the body function', () => {

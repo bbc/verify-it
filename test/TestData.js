@@ -3,7 +3,7 @@
 const { Random } = require('random-js')
 const random = new Random()
 
-const string = (length) => length ? random.string(length) : random.string(10)
+const string = (length) => (length ? random.string(length) : random.string(10))
 
 const integer = (min, max) => random.integer(min, max)
 

@@ -13,7 +13,9 @@ const ObjectGenerators = function (random, wordGenerators) {
 
   this.object = () => {
     const numberOfProperties = random.integer(1, 10)
-    const propertyNames = new Array(numberOfProperties).fill(1).map(() => wordGenerators.word())
+    const propertyNames = new Array(numberOfProperties)
+      .fill(1)
+      .map(() => wordGenerators.word())
     return createObject(propertyNames)
   }
 
