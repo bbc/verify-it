@@ -1,5 +1,13 @@
 # `verify-it`
 
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![TypeScript docs verifier](https://img.shields.io/badge/checked_with_%E2%9C%93-TS_docs_verifier-blue.svg?style=flat-square)](https://github.com/bbc/typescript-docs-verifier)
+<a href="https://www.npmjs.com/package/verify-it">
+<img alt="npm version" src="https://img.shields.io/npm/v/verify-it.svg?style=flat-square"></a>
+<a href="https://www.npmjs.com/package/verify-it">
+<img alt="weekly downloads from npm" src="https://img.shields.io/npm/dw/verify-it.svg?style=flat-square"></a>
+[![Apache 2.0](https://img.shields.io/hexpm/l/plug.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0)
+
 _Randomised test property/data generation for NodeJS._
 
 This module provides:
