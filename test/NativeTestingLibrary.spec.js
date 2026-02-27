@@ -21,4 +21,9 @@ describe('When using the native Node.js testing library', () => {
       t.assert.strictEqual(typeof value, 'string')
     }
   )
+
+  verify.it('supports async tests using done', Gen.string, (value, t, done) => {
+    t.assert.strictEqual(typeof value, 'string')
+    done()
+  })
 })
