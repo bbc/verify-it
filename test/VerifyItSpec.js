@@ -41,6 +41,17 @@ describe('verify-it', () => {
     }
   )
 
+  verify.it('should not allow mutation of the global verify object', () => {
+    delete verify.it
+    assert.ok(verify.it)
+    verify.other = 'test'
+    assert.equal(verify.other, undefined)
+  })
+
+  verify.it('should support hasOwn on global verify object', () => {
+    assert.equal('it' in verify, true)
+  })
+
   verify.test(
     'should generate values using the supplied functions using verify.test',
     () => generated1,
