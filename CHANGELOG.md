@@ -21,4 +21,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Errors due to missing global `it` and `test` functions are only thrown when the global `verify` object is used (previously an error would be thrown immediately when this library was imported)
 
 [Unreleased]: https://github.com/bbc/verify-it/compare/v2.4.0...HEAD
-[2.4.0]: https://github.com/bbc/verify-it/compare/v2.4.0...v2.3.3
+[2.4.0]: https://github.com/bbc/verify-it/compare/v2.3.3...v2.4.0
